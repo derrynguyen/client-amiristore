@@ -18,28 +18,44 @@ import About from './components/About/About';
 import Detail from './components/Store/Detail';
 import Dashboard from './components/Manager/Dashboard';
 import Error from './components/Error/Error';
+import Blog from './components/Blog/Blog';
+import Paymnet from './components/Cart/Payment';
 
 let cx = classNames.bind(styles);
 
 const App = () => {
   const history = useHistory();
 
+  const [orders, setOrders] = useState([]);
 
   const [isLogin, setIsLogin] = useState(false);
   const getName = Cookies.get('name');
   const getRole = Cookies.get('role');
 
+  const getIDUser = Cookies.get('id');
 
   useEffect(() => {
-    const getIDUser = Cookies.get('id');
+    const intervalId = setInterval(() => {
+      getOrder();
+      if (getIDUser != null) {
+        setIsLogin(true);
+      }
+      else {
+        setIsLogin(false);
+      }
+    }, 1000); // cập nhật dữ liệu mỗi giây
 
-    if (getIDUser != null) {
-      setIsLogin(true);
-    }
-    else {
-      setIsLogin(false);
-    }
-  }, []);
+    return () => clearInterval(intervalId);
+
+  }, [orders]);
+
+  function getOrder() {
+    axios.get(`http://localhost/Server/api/cart/order.php?getIDUser=${getIDUser}`).then(function (response) {
+      setOrders(response.data.data);
+
+    });
+  }
+
 
   const handleLogout = () => {
 
@@ -91,6 +107,9 @@ const App = () => {
               <NavLink to='/talk' className={cx('navlink')} activeClassName={cx('active')}>
                 <span>Thảo luận</span>
               </NavLink>
+              <NavLink to='/payment' className={cx('navlink')} activeClassName={cx('active')}>
+                <span>Thanh toán</span>
+              </NavLink>
               {
                 getRole == '2' ?
                   <NavLink to='/manager' className={cx('navlink')} activeClassName={cx('active')}>
@@ -121,9 +140,15 @@ const App = () => {
               )}
 
               <NavLink to='/cart' className={cx('navlink')} activeClassName={cx('active')}>
+                <div className={cx('cart')}>
+                  {orders !== undefined && orders.length > 0 ? <span className={cx('count')} style={{ color: 'black' }}>{orders.length}</span> : <span className={cx('count')}>0</span>}
+
+                  <i className={cx('fa-solid fa-cart-shopping')}></i>
+                </div>
 
 
-                <i className="fa-solid fa-cart-shopping"></i>
+
+
               </NavLink>
 
             </div>
@@ -150,6 +175,12 @@ const App = () => {
               </Route>
               <Route path='/about'>
                 <About />
+              </Route>
+              <Route path='/talk'>
+                <Blog />
+              </Route>
+              <Route path='/payment'>
+                <Paymnet />
               </Route>
               <Route path={`/detail/:id`}>
                 <Detail

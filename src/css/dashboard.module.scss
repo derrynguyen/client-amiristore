@@ -1,6 +1,6 @@
 .main {
     width: 100%;
-    height: 70vh;
+    height: 100vh;
     display: grid;
     grid-template-columns: 20% 80%;
     overflow: hidden;
@@ -28,8 +28,11 @@
     }
     .content {
         width: 80%;
+        height: 100vh;
+        overflow-y: scroll;
         margin-left: 10vh;
         margin-top: 4vh;
+        margin-bottom: 10vh;
         .pagination {
             display: flex;
             justify-content: center;
@@ -72,4 +75,26 @@
             color: #666;
         }
     }
+}
+
+select {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 16px;
+    outline: none;
+}
+
+select:hover {
+    background-color: #f8f8f8;
+}
+select:focus {
+    background-color: #f8f8f8;
+}
+select {
+    color: #555;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }

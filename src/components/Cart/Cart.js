@@ -1,23 +1,109 @@
-import {
-    MDBBtn,
-    MDBCard,
-    MDBCardBody,
-    MDBCardHeader,
-    MDBCardImage,
-    MDBCol,
-    MDBContainer,
-    MDBIcon,
-    MDBInput,
-    MDBListGroup,
-    MDBListGroupItem,
-    MDBRipple,
-    MDBRow,
-    MDBTooltip,
-    MDBTypography,
-} from "mdb-react-ui-kit";
-import React from "react";
+import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
+import axios from 'axios'
+import { Route, Redirect, Switch, useHistory, NavLink } from "react-router-dom";
+import { MDBBtn, MDBCard, MDBCardBody, MDBCardHeader, MDBCardImage, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBListGroup, MDBListGroupItem, MDBRipple, MDBRow, MDBTooltip, MDBTypography, } from "mdb-react-ui-kit";
+import classNames from 'classnames/bind'
+import Cookies from 'js-cookie';
+
+
+import styles from '../../css/cart.module.css'
+
+
+let cx = classNames.bind(styles);
 
 const Cart = () => {
+    const history = useHistory()
+    const [orders, setOrders] = useState([]);
+
+    // const [totalOneItem, setTotalOneItem] = useState(0);
+
+    const getIDUser = Cookies.get('id');
+
+    // Tính tổng tiền các đơn hàng
+    const total = orders && orders.length > 0 ? orders.reduce((acc, order) => {
+        return acc + (order.amount * order.price);
+    }, 0) : 0;
+
+
+
+    useEffect(() => {
+        getOrder();
+    }, [orders]);
+
+    function getOrder() {
+        axios.get(`http://localhost/Server/api/cart/order.php?getIDUser=${getIDUser}`).then(function (response) {
+            setOrders(response.data.data);
+
+        });
+    }
+    const handleRemoveAmount = async (id, amount) => {
+        const formData = new FormData();
+
+        formData.append('amount', amount - 1);
+        const response = await axios.post(`http://localhost/Server/api/cart/removeamount.php?id=${id}`, formData)
+
+        if (response.data.success) {
+            getOrder();
+
+        }
+        else {
+            // Toast.fire({ icon: 'error', title: `${response.data.error}` });
+        }
+
+    }
+
+    const handleAddAmount = (id, amount) => {
+        const formData = new FormData();
+
+        formData.append('amount', amount + 1);
+        axios.post(`http://localhost/Server/api/cart/updateamount.php?id=${id}`, formData)
+            .then(response => {
+                getOrder();
+            })
+            .catch(error => console.error(error));
+    }
+    const handleRemoveCart = (id) => {
+
+        axios.post(`http://localhost/Server/api/cart/removecartitem.php?id=${id}`)
+            .then(response => {
+                getOrder();
+            })
+            .catch(error => console.error(error));
+    }
+
+    const handlePayment = () => {
+        const data = {
+            getIDUser: getIDUser,
+            orders: JSON.stringify(orders),
+        };
+        axios.post('http://localhost/Server/api/cart/payment.php', data)
+            .then(response => {
+                console.log(response.data)
+
+                if (response.data.success) {
+                    Toast.fire({ icon: 'success', title: `${response.data.success}` });
+                    // history.push('/payment');
+                } else {
+                    Toast.fire({ icon: 'error', title: `${response.data.error}` });
+                }
+            })
+            .catch(error => console.error(error));
+    }
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'center-end',
+        showConfirmButton: false,
+        timer: 5000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer);
+            toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+    });
+
+
     return (
         <section className="h-100 gradient-custom">
             <MDBContainer className="py-5 h-100">
@@ -26,142 +112,71 @@ const Cart = () => {
                         <MDBCard className="mb-4">
                             <MDBCardHeader className="py-3">
                                 <MDBTypography tag="h5" className="mb-0">
-                                    Giỏ hàng - 2 món
+                                    {orders !== undefined && orders.length > 0 ? <span >Hiện có :{orders.length} sản phẩm</span> : <span className={cx('count')}></span>}
                                 </MDBTypography>
                             </MDBCardHeader>
                             <MDBCardBody>
-                                <MDBRow>
-                                    <MDBCol lg="3" md="12" className="mb-4 mb-lg-0">
-                                        <MDBRipple rippleTag="div" rippleColor="light"
-                                            className="bg-image rounded hover-zoom hover-overlay">
-                                            <img
-                                                src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/12a.webp"
-                                                className="w-100" />
-                                            <a href="#!">
-                                                <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.2)", }}>
-                                                </div>
-                                            </a>
-                                        </MDBRipple>
-                                    </MDBCol>
+                                {orders == null ? <span>Giỏ hàng hiện không có sản phẩm </span> :
+                                    orders.map((item, key) => {
+                                        return (
+                                            <MDBRow>
+                                                <MDBCol lg="3" md="12" className="mb-4 mb-lg-0">
+                                                    <MDBRipple rippleTag="div" rippleColor="light"
+                                                        className="bg-image rounded hover-zoom hover-overlay">
+                                                        <img
+                                                            src={require('../../images/items/' + item.img)}
+                                                            className="w-100" />
+                                                        <a href="#!">
+                                                            <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.2)", }}>
+                                                            </div>
+                                                        </a>
+                                                    </MDBRipple>
 
-                                    <MDBCol lg="5" md="6" className=" mb-4 mb-lg-0">
-                                        <p>
-                                            <strong>Blue denim shirt</strong>
-                                        </p>
-                                        <p>Color: blue</p>
-                                        <p>Size: M</p>
+                                                </MDBCol>
 
-                                        <MDBTooltip wrapperProps={{ size: "sm" }} wrapperClass="me-1 mb-2"
-                                            title="Xóa khỏi giỏ hàng">
-                                            <MDBIcon fas icon="trash" />
-                                        </MDBTooltip>
+                                                <MDBCol lg="5" md="6" className=" mb-4 mb-lg-0">
+                                                    <p>
+                                                        <strong>{item.name}</strong>
+                                                    </p>
+                                                    <p>Color: {item.color}</p>
+                                                    <p>Size: {item.size}</p>
 
-                                        <MDBTooltip wrapperProps={{ size: "sm", color: "danger" }} wrapperClass="me-1 mb-2"
-                                            title="Thêm vào yêu thích">
-                                            <MDBIcon fas icon="heart" />
-                                        </MDBTooltip>
-                                    </MDBCol>
-                                    <MDBCol lg="4" md="6" className="mb-4 mb-lg-0">
-                                        <div className="d-flex mb-4" style={{ maxWidth: "300px" }}>
-                                            <MDBBtn className="px-3 me-2">
-                                                <MDBIcon fas icon="minus" />
-                                            </MDBBtn>
+                                                    <button className="btn btn-primary px-3 me-2" onClick={(id) => handleRemoveCart(item.id)}
+                                                        title="Xóa khỏi giỏ hàng">
+                                                        <MDBIcon fas icon="trash" />
+                                                    </button>
 
-                                            <MDBInput defaultValue={1} min={0} type="number" label="Số lượng" />
 
-                                            <MDBBtn className="px-3 ms-2">
-                                                <MDBIcon fas icon="plus" />
-                                            </MDBBtn>
-                                        </div>
+                                                </MDBCol>
+                                                <MDBCol lg="4" md="6" className="mb-4 mb-lg-0">
+                                                    <div className="d-flex mb-4 mt-4" style={{ maxWidth: "300px" }}>
+                                                        <button className="btn btn-primary px-3 me-2" onClick={(id, amount) => handleRemoveAmount(item.id, item.amount)}>
+                                                            <MDBIcon fas icon="minus" />
+                                                        </button>
 
-                                        <p className="text-start text-md-center">
-                                            <strong>$17.99</strong>
-                                        </p>
-                                    </MDBCol>
-                                </MDBRow>
+                                                        <MDBInput min='0' value={item.amount} type="number" label="Số lượng" />
 
-                                <hr className="my-4" />
+                                                        <button className="btn btn-primary px-3 ms-2" onClick={(id, amount) => handleAddAmount(item.id, item.amount)}>
+                                                            <MDBIcon fas icon="plus" />
+                                                        </button>
+                                                    </div>
 
-                                <MDBRow>
-                                    <MDBCol lg="3" md="12" className="mb-4 mb-lg-0">
-                                        <MDBRipple rippleTag="div" rippleColor="light"
-                                            className="bg-image rounded hover-zoom hover-overlay">
-                                            <img
-                                                src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Vertical/13a.webp"
-                                                className="w-100" />
-                                            <a href="#!">
-                                                <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.2)", }}>
-                                                </div>
-                                            </a>
-                                        </MDBRipple>
-                                    </MDBCol>
+                                                    <p className="text-start text-md-center">
+                                                        {/* <strong>{(totalPriceItems).toLocaleString('en-US')} VNĐ</strong> */}
+                                                        <strong>{(item.amount * item.price).toLocaleString('en-US')} VNĐ</strong>
 
-                                    <MDBCol lg="5" md="6" className=" mb-4 mb-lg-0">
-                                        <p>
-                                            <strong>Red hoodie</strong>
-                                        </p>
-                                        <p>Color: red</p>
-                                        <p>Size: M</p>
+                                                    </p>
+                                                </MDBCol>
+                                                <hr className='mt-3' />
 
-                                        <MDBTooltip wrapperProps={{ size: "sm" }} wrapperClass="me-1 mb-2"
-                                            title="Xóa khỏi giỏ hàng">
-                                            <MDBIcon fas icon="trash" />
-                                        </MDBTooltip>
-
-                                        <MDBTooltip wrapperProps={{ size: "sm", color: "danger" }} wrapperClass="me-1 mb-2"
-                                            title="Thêm vào yêu thích">
-                                            <MDBIcon fas icon="heart" />
-                                        </MDBTooltip>
-                                    </MDBCol>
-                                    <MDBCol lg="4" md="6" className="mb-4 mb-lg-0">
-                                        <div className="d-flex mb-4" style={{ maxWidth: "300px" }}>
-                                            <MDBBtn className="px-3 me-2">
-                                                <MDBIcon fas icon="minus" />
-                                            </MDBBtn>
-
-                                            <MDBInput defaultValue={1} min={0} type="number" label="Số lượng" />
-
-                                            <MDBBtn className="px-3 ms-2">
-                                                <MDBIcon fas icon="plus" />
-                                            </MDBBtn>
-                                        </div>
-
-                                        <p className="text-start text-md-center">
-                                            <strong>$17.99</strong>
-                                        </p>
-                                    </MDBCol>
-                                </MDBRow>
+                                            </MDBRow>
+                                        )
+                                    })
+                                }
                             </MDBCardBody>
                         </MDBCard>
 
-                        <MDBCard className="mb-4">
-                            <MDBCardBody>
-                                <p>
-                                    <strong>Bắt đầu ship hàng từ ngày</strong>
-                                </p>
-                                <p className="mb-0">12.10.2020 - 14.10.2020</p>
-                            </MDBCardBody>
-                        </MDBCard>
 
-                        <MDBCard className="mb-4 mb-lg-0">
-                            <MDBCardBody>
-                                <p>
-                                    <strong>Chúng tôi chấp nhận thanh toán</strong>
-                                </p>
-                                <MDBCardImage className="me-2" width="45px"
-                                    src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
-                                    alt="Visa" />
-                                <MDBCardImage className="me-2" width="45px"
-                                    src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
-                                    alt="American Express" />
-                                <MDBCardImage className="me-2" width="45px"
-                                    src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
-                                    alt="Mastercard" />
-                                <MDBCardImage className="me-2" width="45px"
-                                    src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.png"
-                                    alt="PayPal acceptance mark" />
-                            </MDBCardBody>
-                        </MDBCard>
                     </MDBCol>
                     <MDBCol md="4">
                         <MDBCard className="mb-4">
@@ -175,35 +190,41 @@ const Cart = () => {
                                     <MDBListGroupItem
                                         className="d-flex justify-content-between align-items-center border-0 px-0 pb-0">
                                         Tổng tiền sản phẩm
-                                        <span>$53.98</span>
+                                        <strong>{total.toLocaleString('en-US')} VNĐ</strong>
+                                    </MDBListGroupItem>
+                                    <MDBListGroupItem
+                                        className="d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+                                        Phí vận chuyển
+                                        <span>50,000 VNĐ</span>
                                     </MDBListGroupItem>
                                     <MDBListGroupItem className="d-flex justify-content-between align-items-center px-0">
                                         Vận chuyển
                                         <span>Gojeck</span>
                                     </MDBListGroupItem>
+
                                     <MDBListGroupItem
                                         className="d-flex justify-content-between align-items-center border-0 px-0 mb-3">
                                         <div>
                                             <strong>Tổng thanh toán</strong>
                                             <strong>
-                                                <p className="mb-0">(Bao gồm VAT)</p>
+                                                <p className="mb-0">(Bao gồm VAT 10%)</p>
                                             </strong>
                                         </div>
                                         <span>
-                                            <strong>$53.98</strong>
+                                            <strong>{(total + (total * 0.1) + 50000).toLocaleString('en-US')} VNĐ</strong>
                                         </span>
                                     </MDBListGroupItem>
                                 </MDBListGroup>
 
-                                <MDBBtn block size="lg">
+                                <button className='btn btn-success w-100' block size="lg" onClick={handlePayment}>
                                     Thanh toán
-                                </MDBBtn>
+                                </button>
                             </MDBCardBody>
                         </MDBCard>
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
-        </section>
+        </section >
     );
 }
 export default Cart;

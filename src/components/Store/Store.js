@@ -16,6 +16,7 @@ const Store = () => {
     const [filter, setFilter] = useState('');
     const [products, setProducts] = useState([]);
     const [selectedOption, setSelectedOption] = useState("");
+    const [selectedPrice, setSelectedPrice] = useState("");
 
 
     useEffect(() => {
@@ -34,8 +35,15 @@ const Store = () => {
     ///Hàm lọc theo Dropdown
     const handleDropdownSelect = (event) => {
         const selectedValue = event.target.value;
+        setSelectedOption(event.target.value);
         setSelectedOption(selectedValue === "" ? "" : selectedValue);
+
+
     };
+    // const handleSort = (selectedValue) => {
+    //     let sortedList = [...paginatedData]; // list là danh sách cần sắp xếp
+    //     // cập nhật danh sách đã sắp xếp
+    // };
 
     const options = [
         { id: 1, value: "Thom Brown" },
@@ -48,17 +56,17 @@ const Store = () => {
     ];
 
     const optionsprice = [
-        { id: 1, value: "Cao đến thấp" },
-        { id: 2, value: "Thấp đến cao" },
-
-
+        { value: "Giá từ cao đến thấp", label: "" },
+        { value: "Giá từ thấp đến cao", label: "" }
     ];
+
 
 
 
     const filteredProducts = paginatedData.filter((product) =>
         (selectedOption === "Tất cả thương hiệu" || product.name_brand === selectedOption || selectedOption === "") &&
         (product.name.toLowerCase().includes(filter.toLowerCase()))
+
     );
 
     function getProducts() {
@@ -84,7 +92,7 @@ const Store = () => {
                             ))}
                         </select>
 
-                        <p style={{ marginTop: '3vh' }}>Giá tiền</p>
+                        <p style={{ marginTop: '3vh' }} value={selectedPrice} onChange={handleDropdownSelect}>Giá tiền</p>
                         <select className={cx('selected')}>
                             {optionsprice.map((option) => (
                                 <option key={option.id} >
@@ -110,7 +118,7 @@ const Store = () => {
                                         <NavLink to={`/detail/${item.id}`}>
                                             <div className={cx('card')} >
                                                 <div className={cx('img')}>
-                                                    <img src={require('../../images/items/' + item.img + '.png')} />
+                                                    <img src={require('../../images/items/' + item.img)} />
                                                 </div>
                                                 <div className={cx('brand')}>
                                                     <p>{item.name_brand}</p>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios'
 
 import 'mdb-ui-kit/css/mdb.min.css';
 import { Route, Link, Switch, NavLink } from "react-router-dom";
@@ -14,6 +15,20 @@ import styles from '../../css/home.module.css'
 let cx = classNames.bind(styles);
 
 const Home = () => {
+
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        getProducts();
+
+    }, []);
+
+    function getProducts() {
+        axios.get('http://localhost/Server/api/products/read.php').then(function (response) {
+            // console.log(response.data.data);
+            setProducts(response.data.data);
+        });
+    }
+
     return (
         <div className={cx('home')}>
             <div className='container'>
@@ -26,6 +41,47 @@ const Home = () => {
                 </div>
 
 
+                <div style={{ marginTop: '4vh', width: '100%', textAlign: 'center', height: '40vh' }}>
+                    {/* <h3>Sản phẩm nổi bật</h3> */}
+                    {/* 
+                    <div className="row row-cols-3">
+                        {
+                            products.map((item, key) => {
+                                return (
+                                    <NavLink to={`/detail/${item.id}`}>
+                                        {
+                                            item.rate > '3' ?
+
+                                                <div className={cx('card')} >
+                                                    <div className={cx('img')}>
+                                                        <img src={require('../../images/items/' + item.img)} />
+                                                    </div>
+                                                    <div className={cx('brand')}>
+                                                        <p>{item.name_brand}</p>
+                                                    </div>
+                                                    <div className={cx('title')}>
+                                                        <p>{item.name}</p>
+                                                    </div>
+                                                    <div className={cx('price')}>
+                                                        <p>{item.price.toLocaleString('en-US')} vnđ</p>
+                                                    </div>
+
+                                                </div>
+                                                : <></>
+                                        }
+
+
+
+
+                                    </NavLink>
+
+                                )
+                            })
+                        }
+
+                    </div> */}
+                </div>
+                {/* 
                 <div
 
                     style={{ fontFamily: 'ThanhHai', color: 'gray', fontSize: '35px', marginTop: '60px', marginBottom: '10vh' }}
@@ -79,7 +135,7 @@ const Home = () => {
                         <span className="carousel-control-next-icon" aria-hidden="true"></span>
                         <span className="visually-hidden">Next</span>
                     </button>
-                </div>
+                </div> */}
 
             </div>
 
