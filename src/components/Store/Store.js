@@ -75,7 +75,7 @@ const Store = () => {
     );
 
     function getProducts() {
-        axios.get('http://localhost/Server/api/products/read.php').then(function (response) {
+        axios.get('http://14.225.205.66/api/products/read.php').then(function (response) {
             // console.log(response.data.data);
             setProducts(response.data.data);
         });

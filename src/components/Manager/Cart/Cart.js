@@ -30,7 +30,7 @@ const Cart = () => {
     const [payment, setPayment] = useState([]);
 
     function getPayment() {
-        axios.get(`http://localhost/Server/api/cart/read_payment_admin.php`).then(function (response) {
+        axios.get(`http://14.225.205.66/api/cart/read_payment_admin.php`).then(function (response) {
             setPayment(response.data.data);
         });
     }

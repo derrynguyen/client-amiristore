@@ -49,7 +49,7 @@ const Login = () => {
     const LoginUser = async () => {
 
         try {
-            const response = await axios.post('http://localhost/Server/api/users/auth.php', { email, password });
+            const response = await axios.post('http://14.225.205.66/api/users/auth.php', { email, password });
             console.log(response.data);
             if (response.data.success) {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
