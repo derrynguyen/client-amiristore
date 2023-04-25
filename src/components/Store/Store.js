@@ -60,7 +60,12 @@ const Store = () => {
         { value: "Giá từ thấp đến cao", label: "" }
     ];
 
+    const optionstype = [
+        { id: 1, value: "Áo sơ mi" },
+        { id: 2, value: "Áo thun" },
+        { id: 3, value: "Áo len" },
 
+    ];
 
 
     const filteredProducts = paginatedData.filter((product) =>
@@ -95,6 +100,15 @@ const Store = () => {
                         <p style={{ marginTop: '3vh' }} value={selectedPrice} onChange={handleDropdownSelect}>Giá tiền</p>
                         <select className={cx('selected')}>
                             {optionsprice.map((option) => (
+                                <option key={option.id} >
+                                    {option.value}
+                                </option>
+                            ))}
+                        </select>
+
+                        <p style={{ marginTop: '3vh' }} value={selectedPrice} onChange={handleDropdownSelect}>Loại quần áo</p>
+                        <select className={cx('selected')}>
+                            {optionstype.map((option) => (
                                 <option key={option.id} >
                                     {option.value}
                                 </option>

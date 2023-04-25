@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 const usePagination = (data, itemsPerPage) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const totalPages = Math.ceil(data.length / itemsPerPage);
+    const totalPages = data ? Math.ceil(data.length / itemsPerPage) : 0;
 
     useEffect(() => {
         setCurrentPage(1);
@@ -21,10 +21,10 @@ const usePagination = (data, itemsPerPage) => {
         setCurrentPage(pageNumber);
     };
 
-    const paginatedData = data.slice(
+    const paginatedData = data ? data.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
-    );
+    ) : [];
 
     return {
         currentPage,
@@ -37,3 +37,4 @@ const usePagination = (data, itemsPerPage) => {
 };
 
 export default usePagination;
+

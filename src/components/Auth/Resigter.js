@@ -22,7 +22,6 @@ const Resigter = () => {
     const role = 1;
     const avatar = 'macdinh';
     const point = 0;
-    const amount_order = 0;
 
     const handleUserName = (event) => {
         SetUsername(event.target.value);
@@ -49,7 +48,7 @@ const Resigter = () => {
     const registerUser = async () => {
 
         try {
-            const response = await axios.post('http://localhost/Server/api/users/register.php', { username, email, password, phone, addreas, sex, role, avatar, point, amount_order });
+            const response = await axios.post('http://localhost/Server/api/users/register.php', { username, email, password, phone, addreas, sex, role, avatar, point });
             console.log(response.data);
             if (response.data.success) {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });

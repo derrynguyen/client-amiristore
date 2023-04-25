@@ -42,37 +42,37 @@ const Home = () => {
 
 
                 <div style={{ marginTop: '4vh', width: '100%', textAlign: 'center', height: '40vh' }}>
-                    {/* <h3>Sản phẩm nổi bật</h3> */}
-                    {/* 
-                    <div className="row row-cols-3">
+                    <h3>Sản phẩm nổi bật</h3>
+
+                    {/* <div className="row row-cols-3">
                         {
                             products.map((item, key) => {
                                 return (
                                     <NavLink to={`/detail/${item.id}`}>
                                         {
-                                            item.rate > '3' ?
+                                            <div className={cx('card')} >
+                                                {item.rate > 3 ?
+                                                    <>
+                                                        <div className={cx('img')}>
+                                                            <img src={require('../../images/items/' + item.img)} />
+                                                        </div>
+                                                        <div className={cx('brand')}>
+                                                            <p>{item.name_brand}</p>
+                                                        </div>
+                                                        <div className={cx('title')}>
+                                                            <p>{item.name}</p>
+                                                        </div>
+                                                        <div className={cx('price')}>
+                                                            <p>{item.price.toLocaleString('en-US')} vnđ</p>
+                                                        </div>
+                                                    </>
+                                                    :
+                                                    <></>}
 
-                                                <div className={cx('card')} >
-                                                    <div className={cx('img')}>
-                                                        <img src={require('../../images/items/' + item.img)} />
-                                                    </div>
-                                                    <div className={cx('brand')}>
-                                                        <p>{item.name_brand}</p>
-                                                    </div>
-                                                    <div className={cx('title')}>
-                                                        <p>{item.name}</p>
-                                                    </div>
-                                                    <div className={cx('price')}>
-                                                        <p>{item.price.toLocaleString('en-US')} vnđ</p>
-                                                    </div>
 
-                                                </div>
-                                                : <></>
+                                            </div>
+
                                         }
-
-
-
-
                                     </NavLink>
 
                                 )

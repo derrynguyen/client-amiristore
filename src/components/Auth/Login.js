@@ -55,13 +55,12 @@ const Login = () => {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
                 setLoggedIn(true);
                 Cookies.set('id', response.data.session.id, { expires: 3600 });
-                Cookies.set('name', response.data.session.name, { expires: 3600 });
+                Cookies.set('fullname', response.data.session.fullname, { expires: 3600 });
                 Cookies.set('email', response.data.session.email, { expires: 3600 });
                 Cookies.set('phone', response.data.session.phone, { expires: 3600 });
                 Cookies.set('addreas', response.data.session.addreas, { expires: 3600 });
                 Cookies.set('point', response.data.session.point, { expires: 3600 });
                 Cookies.set('sex', response.data.session.sex, { expires: 3600 });
-                Cookies.set('amount_order', response.data.session.amount_order, { expires: 3600 });
                 Cookies.set('role', response.data.session.role, { expires: 3600 });
                 Cookies.set('avatar', response.data.session.avatar, { expires: 3600 });
 

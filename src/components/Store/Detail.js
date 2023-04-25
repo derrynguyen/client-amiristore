@@ -87,7 +87,7 @@ const Detail = ({ props }) => {
                     <div className="col-4" style={{ marginBottom: '1vh', marginTop: '10vh' }}>
                         <img src={require('../../images/items/' + product.img)} style={{ width: '100%' }} />
                     </div>
-                    <div className="col-8" style={{ marginBottom: '1vh', marginTop: '10vh', }}>
+                    <div className="col-6" style={{ marginBottom: '1vh', marginTop: '10vh', marginLeft: '5vh' }}>
                         <p style={{ fontSize: '20px', fontFamily: 'ThanhHai' }}>{product.name_brand}</p>
                         <h3 style={{ fontSize: '29px', fontFamily: 'monospace' }}>{product.name}</h3>
                         <p style={{ fontSize: '18px', fontFamily: 'monospace' }}>{product.price.toLocaleString('en-US')} VNĐ</p>

@@ -19,7 +19,9 @@ import Detail from './components/Store/Detail';
 import Dashboard from './components/Manager/Dashboard';
 import Error from './components/Error/Error';
 import Blog from './components/Blog/Blog';
-import Paymnet from './components/Cart/Payment';
+import Editproducts from './components/Manager/Products/Editproducts';
+import Deleteproducts from './components/Manager/Products/Deleteproducts';
+import Editcart from './components/Manager/Cart/Editcart';
 
 let cx = classNames.bind(styles);
 
@@ -29,7 +31,7 @@ const App = () => {
   const [orders, setOrders] = useState([]);
 
   const [isLogin, setIsLogin] = useState(false);
-  const getName = Cookies.get('name');
+  const getName = Cookies.get('fullname');
   const getRole = Cookies.get('role');
 
   const getIDUser = Cookies.get('id');
@@ -61,7 +63,7 @@ const App = () => {
 
     const removeIDUser = Cookies.remove('id');
     const removeRole = Cookies.remove('role');
-    const removeName = Cookies.remove('name');
+    const removeName = Cookies.remove('fullname');
     const removeEmail = Cookies.remove('email');
     const removeAddreas = Cookies.remove('addreas');
     const removePhone = Cookies.remove('phone');
@@ -86,7 +88,10 @@ const App = () => {
             </div>
 
             <div className={cx('logo')}>
-              <p>AMIRI STORE</p>
+              <NavLink to='/home'>
+                <p style={{ color: 'black' }}>AMIRI STORE</p>
+
+              </NavLink>
             </div>
 
           </div>
@@ -104,12 +109,10 @@ const App = () => {
               <NavLink to='/about' className={cx('navlink')} activeClassName={cx('active')}>
                 <span>Về chúng tôi</span>
               </NavLink>
-              <NavLink to='/talk' className={cx('navlink')} activeClassName={cx('active')}>
+              {/* <NavLink to='/talk' className={cx('navlink')} activeClassName={cx('active')}>
                 <span>Thảo luận</span>
-              </NavLink>
-              <NavLink to='/payment' className={cx('navlink')} activeClassName={cx('active')}>
-                <span>Thanh toán</span>
-              </NavLink>
+              </NavLink> */}
+
               {
                 getRole == '2' ?
                   <NavLink to='/manager' className={cx('navlink')} activeClassName={cx('active')}>
@@ -122,8 +125,8 @@ const App = () => {
               {isLogin ? (
                 <div className={cx('navbarmenu')}>
 
-                  <NavLink to='/profile' className={cx('navlink')} activeClassName={cx('active')}>
-                    <span>{getName}</span>
+                  <NavLink to={`/profile/${getIDUser}`} className={cx('navlink')} activeClassName={cx('active')}>
+                    {getRole == '2' ? <span>{getName}  <span style={{ color: 'red' }}> (QUẢN LÝ)</span></span> : <span>{getName}</span>}
                   </NavLink>
                   <span className={cx('btn-logout')} onClick={handleLogout}>Đăng xuất</span>
 
@@ -157,6 +160,7 @@ const App = () => {
           <div className={cx('body')}>
             <Switch>
               <Redirect exact from="/" to="/home" />
+              <Redirect exact from="/manager" to="/manager/users" />
 
               <Route path='/home'>
                 <Home />
@@ -179,16 +183,26 @@ const App = () => {
               <Route path='/talk'>
                 <Blog />
               </Route>
-              <Route path='/payment'>
-                <Paymnet />
-              </Route>
+
               <Route path={`/detail/:id`}>
                 <Detail
                 />
               </Route>
-              <Route path='/profile'>
+              <Route path={`/manager/products/editproducts/:id`}>
+                <Editproducts
+                />
+              </Route>
+              <Route path={`/manager/products/Deleteproducts/:id`}>
+                <Deleteproducts
+                />
+              </Route>
+
+              <Route path={`/manager/products/Editcart/:id`}>
+                <Editcart
+                />
+              </Route>
+              <Route path={`/profile/:getIDUser`}>
                 <Profile
-                  name={getName}
                 />
               </Route>
               {isLogin ?

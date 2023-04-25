@@ -79,11 +79,9 @@ const Cart = () => {
         };
         axios.post('http://localhost/Server/api/cart/payment.php', data)
             .then(response => {
-                console.log(response.data)
-
                 if (response.data.success) {
                     Toast.fire({ icon: 'success', title: `${response.data.success}` });
-                    // history.push('/payment');
+                    history.push('/profile');
                 } else {
                     Toast.fire({ icon: 'error', title: `${response.data.error}` });
                 }
