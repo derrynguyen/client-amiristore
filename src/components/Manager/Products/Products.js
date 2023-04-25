@@ -102,7 +102,7 @@ const Products = () => {
         formData.append('amount', amount);
         formData.append('rate', rate);
         try {
-            const response = await axios.post('http://14.225.205.66/api/products/create.php', formData, {
+            const response = await axios.post('https://14.225.205.66/api/products/create.php', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -153,7 +153,7 @@ const Products = () => {
         formData.append('amount', amount);
         formData.append('rate', rate);
 
-        axios.post(`http://14.225.205.66/api/products/edit.php?id=${id}`, formData, {
+        axios.post(`https://14.225.205.66/api/products/edit.php?id=${id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -179,7 +179,7 @@ const Products = () => {
         usePagination(products, 6);
 
     function getProducts() {
-        axios.get('http://14.225.205.66/api/products/read.php').then(function (response) {
+        axios.get('https://14.225.205.66/api/products/read.php').then(function (response) {
             // console.log(response.data.data);
             setProducts(response.data.data);
         });

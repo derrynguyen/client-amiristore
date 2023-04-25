@@ -102,7 +102,7 @@ const Editproducts = () => {
         formData.append('amount', amount);
         formData.append('rate', rate);
 
-        axios.post(`http://14.225.205.66/api/products/edit.php?id=${id}`, formData, {
+        axios.post(`https://14.225.205.66/api/products/edit.php?id=${id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -117,7 +117,7 @@ const Editproducts = () => {
 
 
     useEffect(() => {
-        axios.get(`http://14.225.205.66/api/products/detail.php?id=${id}`)
+        axios.get(`https://14.225.205.66/api/products/detail.php?id=${id}`)
             .then(response => setProducts(response.data))
             .catch(error => console.error(error));
         console.log(id);

@@ -47,7 +47,7 @@ const Editcart = () => {
     };
 
     useEffect(() => {
-        axios.get(`http://14.225.205.66/api/cart/detail_cart.php?id=${id}`)
+        axios.get(`https://14.225.205.66/api/cart/detail_cart.php?id=${id}`)
             .then(response => setPayment(response.data))
             .catch(error => console.error(error));
         console.log(id);

@@ -26,7 +26,7 @@ const Detail = ({ props }) => {
     const getIDUser = Cookies.get('id');
 
     useEffect(() => {
-        axios.get(`http://14.225.205.66/api/products/detail.php?id=${id}`)
+        axios.get(`https://14.225.205.66/api/products/detail.php?id=${id}`)
             .then(response => setProduct(response.data))
             .catch(error => console.error(error));
     }, [id]);
@@ -54,7 +54,7 @@ const Detail = ({ props }) => {
         formData.append('amount', amountProducts);
 
         try {
-            const response = await axios.post('http://14.225.205.66/api/cart/addcart.php', formData);
+            const response = await axios.post('https://14.225.205.66/api/cart/addcart.php', formData);
             console.log(response.data);
             if (response.data.success) {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });

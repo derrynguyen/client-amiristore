@@ -48,7 +48,7 @@ const Resigter = () => {
     const registerUser = async () => {
 
         try {
-            const response = await axios.post('http://14.225.205.66/api/users/register.php', { username, email, password, phone, addreas, sex, role, avatar, point });
+            const response = await axios.post('https://14.225.205.66/api/users/register.php', { username, email, password, phone, addreas, sex, role, avatar, point });
             console.log(response.data);
             if (response.data.success) {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
