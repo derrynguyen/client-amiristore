@@ -107,7 +107,6 @@ const Products = () => {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            console.log(response.data);
             if (response.data.success) {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
                 getProducts();
@@ -159,7 +158,6 @@ const Products = () => {
             },
         })
             .then(response => {
-                console.log(response);
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
                 setEditModel(false)
                 getProducts();
@@ -180,7 +178,6 @@ const Products = () => {
 
     function getProducts() {
         axios.get('https://14.225.205.66/api/products/read.php').then(function (response) {
-            // console.log(response.data.data);
             setProducts(response.data.data);
         });
     }

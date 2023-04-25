@@ -50,7 +50,6 @@ const Login = () => {
 
         try {
             const response = await axios.post('https://14.225.205.66/api/users/auth.php', { email, password });
-            console.log(response.data);
             if (response.data.success) {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
                 setLoggedIn(true);
@@ -64,7 +63,6 @@ const Login = () => {
                 Cookies.set('role', response.data.session.role, { expires: 3600 });
                 Cookies.set('avatar', response.data.session.avatar, { expires: 3600 });
 
-                console.log(response.data.session)
                 history.push('/home')
                 window.location.reload();
 

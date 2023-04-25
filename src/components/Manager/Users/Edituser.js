@@ -105,7 +105,6 @@ const Edituser = () => {
             },
         })
             .then(response => {
-                console.log(response);
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
                 history.push('/manager')
             })
@@ -117,7 +116,6 @@ const Edituser = () => {
         axios.get(`https://14.225.205.66/api/products/detail.php?id=${id}`)
             .then(response => setProducts(response.data))
             .catch(error => console.error(error));
-        console.log(id);
     }, [id]);
 
     return (
