@@ -22,6 +22,7 @@ import Blog from './components/Blog/Blog';
 import Editproducts from './components/Manager/Products/Editproducts';
 import Deleteproducts from './components/Manager/Products/Deleteproducts';
 import Editcart from './components/Manager/Cart/Editcart';
+import Edituser from './components/Manager/Users/Edituser';
 
 let cx = classNames.bind(styles);
 
@@ -52,7 +53,7 @@ const App = () => {
   }, [orders]);
 
   function getOrder() {
-    axios.get(`https://14.225.205.66/api/cart/order.php?getIDUser=${getIDUser}`).then(function (response) {
+    axios.get(`https://mikenco-aloalo.000webhostapp.com/api/cart/order.php?getIDUser=${getIDUser}`).then(function (response) {
       setOrders(response.data.data);
 
     });
@@ -205,6 +206,11 @@ const App = () => {
                 <Profile
                 />
               </Route>
+              <Route path={`/manager/users/edituser/:id`}>
+                <Edituser
+                />
+              </Route>
+
               {isLogin ?
                 <div >
                   {

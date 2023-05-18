@@ -16,17 +16,13 @@ const Store = () => {
     const [filter, setFilter] = useState('');
     const [products, setProducts] = useState([]);
     const [selectedOption, setSelectedOption] = useState("");
-    const [selectedPrice, setSelectedPrice] = useState("");
+    const [selectedPriceOption, setSelectedPriceOption] = useState("");
+    const [selectedTypeOption, setSelectedTypeOption] = useState("");
 
 
     useEffect(() => {
         getProducts();
-        // const timer = setTimeout(() => {
-        //     setLoading(false);
-        // }, 6000);
-        // return () => {
-        //     clearTimeout(timer);
-        // };
+
     }, []);
     ////Hàm phân trang
     const { currentPage, totalPages, nextPage, prevPage, goToPage, paginatedData } =
@@ -37,13 +33,40 @@ const Store = () => {
         const selectedValue = event.target.value;
         setSelectedOption(event.target.value);
         setSelectedOption(selectedValue === "" ? "" : selectedValue);
-
-
     };
-    // const handleSort = (selectedValue) => {
-    //     let sortedList = [...paginatedData]; // list là danh sách cần sắp xếp
-    //     // cập nhật danh sách đã sắp xếp
-    // };
+
+    const handleDropdownSelectPrice = (event) => {
+        const selectedValue = event.target.value;
+        setSelectedPriceOption(selectedValue);
+    };
+
+    ///Type
+    //1: áo thun
+    //2: áo sơ mi
+    //3: áo khoác
+    //4: quần
+    //5: túi
+    const handleDropdownSelectType = (event) => {
+        const selectedValue = event.target.value;
+        console.log(selectedValue)
+        setSelectedTypeOption(selectedValue === "0" ? "" : selectedValue);
+    };
+
+    const filteredProducts = paginatedData
+        .filter((product) =>
+            (selectedOption === "Tất cả thương hiệu" || product.name_brand === selectedOption || selectedOption === "") &&
+            // (selectedTypeOption === "" || product.type === selectedTypeOption || selectedTypeOption === "") &&
+            (filter && typeof filter === 'string' ? product.name.toLowerCase().includes(filter.toLowerCase()) : true)
+        )
+        .sort((a, b) => {
+            if (selectedPriceOption === "lowToHigh") {
+                return a.price - b.price;
+            } else if (selectedPriceOption === "highToLow") {
+                return b.price - a.price;
+            } else {
+                return 0;
+            }
+        });
 
     const options = [
         { id: 1, value: "Thom Brown" },
@@ -52,30 +75,21 @@ const Store = () => {
         { id: 4, value: "Saint Laurent" },
         { id: 6, value: "Dsquared2" },
         { id: 7, value: "Tất cả thương hiệu" },
-
     ];
 
     const optionsprice = [
-        { value: "Giá từ cao đến thấp", label: "" },
-        { value: "Giá từ thấp đến cao", label: "" }
+        { value: "lowToHigh", label: "Giá từ cao đến thấp" },
+        { value: "highToLow", label: "Giá từ thấp đến cao" }
     ];
-
     const optionstype = [
-        { id: 1, value: "Áo sơ mi" },
-        { id: 2, value: "Áo thun" },
-        { id: 3, value: "Áo len" },
-
+        { id: 0, value: 0, },
+        { id: 1, value: 1, },
+        { id: 2, value: 2, },
+        { id: 3, value: 3, },
     ];
-
-
-    const filteredProducts = paginatedData.filter((product) =>
-        (selectedOption === "Tất cả thương hiệu" || product.name_brand === selectedOption || selectedOption === "") &&
-        (product.name.toLowerCase().includes(filter.toLowerCase()))
-
-    );
 
     function getProducts() {
-        axios.get('https://14.225.205.66/api/products/read.php').then(function (response) {
+        axios.get('https://mikenco-aloalo.000webhostapp.com/api/products/read.php').then(function (response) {
             setProducts(response.data.data);
         });
     }
@@ -96,23 +110,24 @@ const Store = () => {
                             ))}
                         </select>
 
-                        <p style={{ marginTop: '3vh' }} value={selectedPrice} onChange={handleDropdownSelect}>Giá tiền</p>
-                        <select className={cx('selected')}>
+                        <p style={{ marginTop: '3vh' }}>Giá tiền</p>
+                        <select className={cx('selected')} value={selectedPriceOption} onChange={handleDropdownSelectPrice}>
+
                             {optionsprice.map((option) => (
-                                <option key={option.id} >
-                                    {option.value}
+                                <option key={option.value} value={option.value}>
+                                    {option.label}
                                 </option>
                             ))}
                         </select>
 
-                        <p style={{ marginTop: '3vh' }} value={selectedPrice} onChange={handleDropdownSelect}>Loại quần áo</p>
-                        <select className={cx('selected')}>
+                        {/* <p style={{ marginTop: '3vh' }} value={selectedTypeOption} onChange={handleDropdownSelectType}>Loại quần áo</p>
+                        <select value={selectedTypeOption} onChange={handleDropdownSelectType} className={cx('selected')}>
                             {optionstype.map((option) => (
                                 <option key={option.id} >
                                     {option.value}
                                 </option>
                             ))}
-                        </select>
+                        </select> */}
                     </div>
 
                     <div className="col-sm-8">

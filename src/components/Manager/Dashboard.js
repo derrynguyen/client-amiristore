@@ -22,7 +22,7 @@ import usePagination from '../../service/usePagination ';
 
 import classNames from 'classnames/bind'
 import styles from '../../css/dashboard.module.css'
-import Users from './Users';
+import Users from './Users/Users';
 import Products from './Products/Products';
 import Editproducts from './Products/Editproducts';
 import Cart from './Cart/Cart';

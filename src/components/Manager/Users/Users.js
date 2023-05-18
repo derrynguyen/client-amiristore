@@ -17,11 +17,11 @@ import {
     MDBIcon,
     MDBFile
 } from 'mdb-react-ui-kit';
-import usePagination from '../../service/usePagination ';
+import usePagination from '../../../service/usePagination ';
 
 
 import classNames from 'classnames/bind'
-import styles from '../../css/dashboard.module.css'
+import styles from '../../../css/dashboard.module.css'
 
 
 let cx = classNames.bind(styles);
@@ -37,7 +37,7 @@ const Users = () => {
 
 
     function getUsers() {
-        axios.get('https://14.225.205.66/api/users/users.php').then(function (response) {
+        axios.get('https://mikenco-aloalo.000webhostapp.com/api/users/users.php').then(function (response) {
             setUsers(response.data.data);
         });
     }
@@ -63,7 +63,7 @@ const Users = () => {
                                     <td>
                                         <div className='d-flex align-items-center'>
                                             <img
-                                                src={require('../../images/avatar/' + item.avatar + '.png')}
+                                                src={require('../../../images/avatar/' + item.avatar + '.png')}
                                                 alt=''
                                                 style={{ width: '45px', height: '45px' }}
                                                 className='rounded-circle'
@@ -96,7 +96,11 @@ const Users = () => {
 
                                     </td>
                                     <td>
-                                        <button type="button" className="btn btn-info">Chỉnh sửa</button>
+                                        <NavLink to={`/manager/users/edituser/${item.id}`}>
+                                            <button type="button" className="btn btn-success" style={{ marginLeft: '2vh' }}>
+                                                Chỉnh sửa
+                                            </button>
+                                        </NavLink>
 
                                         <button style={{ marginLeft: '2vh' }} type="button" className="btn btn-info">Xóa</button>
 

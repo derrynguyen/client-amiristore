@@ -21,52 +21,21 @@ import usePagination from '../../../service/usePagination ';
 
 
 import classNames from 'classnames/bind'
-import styles from '../../../css/editusers.module.css'
+import styles from '../../../css/edituser.module.css'
 
 let cx = classNames.bind(styles);
 const Edituser = () => {
     const history = useHistory()
     const { id } = useParams();
 
-    const [products, setProducts] = useState([]);
     const [name, setName] = useState([]);
-    const [email, setEmail] = useState([]);
-    const [avatar, setAvatar] = useState([]);
-    const [phone, setPhone] = useState([]);
-    const [addreas, setAddreas] = useState([]);
-    const [sex, setSex] = useState([]);
-    const [role, SetRole] = useState([]);
 
 
     ///////////Sử lý thêm
     const handleName = (event) => {
         setName(event.target.value);
     }
-    const handlePrice = (event) => {
-        setPrice(event.target.value);
-    }
-    const handleNamebrand = (event) => {
-        setName_brand(event.target.value);
-    }
-    const handleColor = (event) => {
-        setColor(event.target.value);
-    }
-    const handleNAddreas = (event) => {
-        setAddreas(event.target.value);
-    }
-    const handleSession = (event) => {
-        setSession(event.target.value);
-    }
-    const handleAmount = (event) => {
-        setAmount(event.target.value);
-    }
 
-    const handleType = (event) => {
-        setType(event.target.value);
-    }
-    const handleSex = (event) => {
-        setSex(event.target.value);
-    }
     const img2 = '';
     const img3 = '';
     const rate = '0';
@@ -83,46 +52,42 @@ const Edituser = () => {
         },
     });
 
-    const Edituser = (id) => {
-        const formData = new FormData();
-        formData.append('name_brand', name_brand);
-        formData.append('name', name);
-        formData.append('img', img);
-        formData.append('img2', img2);
-        formData.append('img3', img3);
-        formData.append('price', price);
-        formData.append('sex', sex);
-        formData.append('type', type);
-        formData.append('color', color);
-        formData.append('addreas', addreas);
-        formData.append('session', session);
-        formData.append('amount', amount);
-        formData.append('rate', rate);
+    // const Edituser = (id) => {
+    //     const formData = new FormData();
+    //     // formData.append('name_brand', name_brand);
+    //     // formData.append('name', name);
+    //     // formData.append('img', img);
+    //     // formData.append('img2', img2);
+    //     // formData.append('img3', img3);
+    //     // formData.append('price', price);
+    //     // formData.append('sex', sex);
+    //     // formData.append('type', type);
+    //     // formData.append('color', color);
+    //     // formData.append('addreas', addreas);
+    //     // formData.append('session', session);
+    //     // formData.append('amount', amount);
+    //     // formData.append('rate', rate);
 
-        axios.post(`https://14.225.205.66/api/products/edit.php?id=${id}`, formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        })
-            .then(response => {
-                Toast.fire({ icon: 'success', title: `${response.data.success}` });
-                history.push('/manager')
-            })
-            .catch(error => console.error(error));
-    }
+    //     axios.post(`https://mikenco-aloalo.000webhostapp.com/api/products/edit.php?id=${id}`, formData, {
+    //         headers: {
+    //             'Content-Type': 'multipart/form-data',
+    //         },
+    //     })
+    //         .then(response => {
+    //             Toast.fire({ icon: 'success', title: `${response.data.success}` });
+    //             history.push('/manager')
+    //         })
+    //         .catch(error => console.error(error));
+    // }
 
 
-    useEffect(() => {
-        axios.get(`https://14.225.205.66/api/products/detail.php?id=${id}`)
-            .then(response => setProducts(response.data))
-            .catch(error => console.error(error));
-    }, [id]);
+
 
     return (
         <div className={cx('main')}>
             <div className={cx('title')}>
                 <h3>Chỉnh sửa sản phẩm</h3>
-                <p>{products.name}</p>
+                <p>{id}</p>
 
                 <form className='container'>
 
@@ -132,13 +97,13 @@ const Edituser = () => {
                         onChange={handleName}
                         value={name}
                         name="name"
-                        label='Tên sản phẩm'
+                        label='Tên của bạn'
                     />
 
-                    <MDBRow className='mb-5 mt-3'>
+                    {/* <MDBRow className='mb-5 mt-3'>
 
                         <MDBCol>
-                            <MDBInput onChange={handlePrice} type="number" name="price" label='Giá' />
+                            <MDBInput onChange={handlePrice} type="number" name="price" label='Số điện thoại của bạn' />
                         </MDBCol>
                         <MDBCol>
                             <MDBInput onChange={handleNamebrand} name="name_brand" label='Tên thương hiệu' />
@@ -191,8 +156,8 @@ const Edituser = () => {
                         <input type="file" name="img" label='Hình ảnh'
                             onChange={(event) => setImg(event.target.files[0])}
                         />
-                    </div>
-                    <NavLink to='/manager/products'>
+                    </div> */}
+                    <NavLink to='/manager/users'>
                         <button type="button" className="btn btn-dark mt-4 m-4">Quay về</button>
 
                     </NavLink>
