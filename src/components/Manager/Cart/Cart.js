@@ -30,7 +30,7 @@ const Cart = () => {
     const [payment, setPayment] = useState([]);
 
     function getPayment() {
-        axios.get(`https://mikenco-aloalo.000webhostapp.com/api/cart/read_payment_admin.php`).then(function (response) {
+        axios.get(`http://14.225.205.66/Server/api/cart/read_payment_admin.php`).then(function (response) {
             setPayment(response.data.data);
         });
     }

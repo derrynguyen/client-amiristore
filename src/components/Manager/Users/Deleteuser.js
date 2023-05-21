@@ -45,7 +45,7 @@ const Deleteuser = () => {
 
 
     const DeleteUser = (id) => {
-        axios.delete(`https://mikenco-aloalo.000webhostapp.com/api/users/deleteuser.php?id=${id}`)
+        axios.delete(`http://14.225.205.66/Server/api/users/deleteuser.php?id=${id}`)
             .then(response => {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
                 history.push('/manager/users');
@@ -54,7 +54,7 @@ const Deleteuser = () => {
     }
 
     useEffect(() => {
-        axios.get(`https://mikenco-aloalo.000webhostapp.com/api/users/read_user.php?getIDUser=${id}`)
+        axios.get(`http://14.225.205.66/Server/api/users/read_user.php?getIDUser=${id}`)
             .then(response => setUser(response.data))
             .catch(error => console.error(error));
     }, [id]);
