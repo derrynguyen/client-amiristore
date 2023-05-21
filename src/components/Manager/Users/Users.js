@@ -37,7 +37,7 @@ const Users = () => {
 
 
     function getUsers() {
-        axios.get('http://14.225.205.66/Server/api/users/users.php').then(function (response) {
+        axios.get('https://14.225.205.66/Server/api/users/users.php').then(function (response) {
             setUsers(response.data.data);
         });
     }

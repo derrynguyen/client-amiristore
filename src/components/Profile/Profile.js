@@ -40,12 +40,12 @@ const Profile = ({ }) => {
 
 
     function getPayment() {
-        axios.get(`http://14.225.205.66/Server/api/cart/read_payment.php?getIDUser=${getIDUser}`).then(function (response) {
+        axios.get(`https://14.225.205.66/Server/api/cart/read_payment.php?getIDUser=${getIDUser}`).then(function (response) {
             setPayment(response.data.data);
         });
     }
     useEffect(() => {
-        axios.get(`http://14.225.205.66/Server/api/users/read_user.php?getIDUser=${getIDUser}`)
+        axios.get(`https://14.225.205.66/Server/api/users/read_user.php?getIDUser=${getIDUser}`)
             .then(response => setUser(response.data))
             .catch(error => console.error(error));
 
