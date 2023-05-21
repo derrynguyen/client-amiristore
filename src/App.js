@@ -25,6 +25,7 @@ import Editcart from './components/Manager/Cart/Editcart';
 import Edituser from './components/Manager/Users/Edituser';
 import Deleteuser from './components/Manager/Users/Deleteuser';
 import Editprfile from './components/Profile/Editprfile';
+import Detailpayment from './components/Profile/Detailpayment';
 
 let cx = classNames.bind(styles);
 
@@ -55,7 +56,7 @@ const App = () => {
   }, [orders]);
 
   function getOrder() {
-    axios.get(`https://14.225.205.66/Server/api/cart/order.php?getIDUser=${getIDUser}`).then(function (response) {
+    axios.get(`http://localhost/Server/api/cart/order.php?getIDUser=${getIDUser}`).then(function (response) {
       setOrders(response.data.data);
 
     });
@@ -220,6 +221,11 @@ const App = () => {
 
               <Route path={`/editprfile/:id`}>
                 <Editprfile
+                />
+              </Route>
+
+              <Route path={`/detailorder/:id`}>
+                <Detailpayment
                 />
               </Route>
               {isLogin ?

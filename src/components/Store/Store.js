@@ -89,7 +89,7 @@ const Store = () => {
     ];
 
     function getProducts() {
-        axios.get('https://14.225.205.66/Server/api/products/read.php').then(function (response) {
+        axios.get('http://localhost/Server/api/products/read.php').then(function (response) {
             setProducts(response.data.data);
         });
     }

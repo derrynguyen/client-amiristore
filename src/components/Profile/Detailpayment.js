@@ -19,14 +19,14 @@ import {
     MDBListGroup,
     MDBListGroupItem
 } from 'mdb-react-ui-kit';
-import usePagination from '../../../service/usePagination ';
+import usePagination from '../../service/usePagination ';
 
 
 import classNames from 'classnames/bind'
-import styles from '../../../css/editcart.module.css'
+import styles from '../../css/editcart.module.css'
 
 let cx = classNames.bind(styles);
-const Editcart = () => {
+const Detailpayment = () => {
     const history = useHistory()
     const { id } = useParams();
     const [paymentdetail, setPaymentdetail] = useState([])
@@ -47,30 +47,19 @@ const Editcart = () => {
         },
     });
 
-    const handleOptionChange = (event) => {
-        const selectedStatus = event.target.value;
-        setStatus(selectedStatus);
-    };
-    const handleStatus = async (id, status) => {
-        axios.post(`http://localhost/Server/api/cart/updatepayment.php?id=${id}`, status)
-            .then(response => {
-                Toast.fire({ icon: 'success', title: `${response.data.success}` });
-            })
-            .catch(error => console.error(error));
-    }
+
 
     useEffect(() => {
         axios.get(`http://localhost/Server/api/cart/detail_payment.php?id=${id}`)
             .then(response => setPaymentdetail(response.data.data))
             .catch(error => console.error(error));
-
     }, [id]);
 
     return (
         <div className={cx('main')}>
             <div className={cx('title')}>
-                <h3>Chỉnh sửa đơn hàng</h3>
-                <p>{id}</p>
+                <h3>Chi tiết đơn hàng</h3>
+                <p>Mã đơn : {id}</p>
             </div>
             <div className='container'>
                 <MDBRow data-mdb-spy="scroll"
@@ -154,20 +143,21 @@ const Editcart = () => {
 
                 </MDBRow>
             </div>
-            {/* {
-                status == 0 ?
-                    <div className='container mt-5'>
-                        <h3 style={{ fontSize: '18px' }}>Tùy chỉnh đơn hàng số : <span style={{ fontSize: '23px' }}>{id}</span></h3>
+            <div>
+                {/* <h3>Tùy chỉnh đơn hàng số : <span>{id}</span></h3>
+                <select className="browser-default custom-select  w-100" onChange={handleStatus}>
+                    <option selected>Giới tính</option>
+                    <option value="1">Nam</option>
+                    <option value="2">Nữ</option>
 
-                        <div onClick={(id, status) => handleStatus(id, status)}>
-                            <button type="button" className="btn btn-dark">Xác nhận</button>
 
-                        </div>
-                    </div> :
-                    <></>
-            } */}
+                </select>
+                <NavLink to={`/detailorder/${id}`}>
+                    <button type="button" className="btn btn-dark">Chi tiết đơn hàng</button>
 
+                </NavLink> */}
+            </div>
         </div>
     )
 }
-export default Editcart;
+export default Detailpayment;

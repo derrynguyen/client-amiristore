@@ -30,7 +30,7 @@ const Cart = () => {
     const [payment, setPayment] = useState([]);
 
     function getPayment() {
-        axios.get(`https://14.225.205.66/Server/api/cart/read_payment_admin.php`).then(function (response) {
+        axios.get(`http://localhost/Server/api/cart/read_payment_admin.php`).then(function (response) {
             setPayment(response.data.data);
         });
     }
@@ -46,15 +46,11 @@ const Cart = () => {
         <div >
             <MDBTable >
                 <MDBTableHead>
-                    <tr>
-                        <th scope='col'>Tên sản phẩm</th>
-                        <th scope='col'>Người mua</th>
-                        <th scope='col'>Màu</th>
-                        <th scope='col'>Size</th>
-                        <th scope='col'>Số lượng</th>
-                        <th scope='col'>Tổng giá</th>
+                    <tr style={{ textAlign: 'start' }}>
+                        <th scope='col'>Mã đơn hàng</th>
+                        <th scope='col'>Ngày tạo</th>
                         <th scope='col'>Trạng thái</th>
-                        <th scope='col'>Tùy chọn</th>
+                        <th scope='col'>Tùy chỉnh</th>
 
                     </tr>
                 </MDBTableHead>
@@ -63,47 +59,20 @@ const Cart = () => {
                         paginatedData.map((item, key) => {
                             return (
 
-                                <tr>
-
+                                <tr style={{ textAlign: 'start' }}>
                                     <td>
-                                        <div className='d-flex align-items-center'>
-                                            <img
-                                                src={item.img}
-                                                alt=''
-                                                style={{ width: '45px', height: '45px' }}
-                                                className='rounded-circle'
-                                            />
-                                            <div className='ms-3'>
-                                                <p className='fw-bold mb-1'>{item.name}</p>
-
-                                            </div>
-                                        </div>
+                                        <p className='fw-normal mb-1'>{item.id_payment_detail}</p>
                                     </td>
 
                                     <td>
-                                        <p className='fw-normal mb-1'>{item.fullname}</p>
-                                    </td>
-
-                                    <td>
-                                        <p className='fw-normal mb-1'>{item.color}</p>
+                                        <p className='fw-normal mb-1'>{item.create_at}</p>
                                     </td>
                                     <td>
-                                        <p className='fw-normal mb-1'>{item.size}</p>
-                                    </td>
-                                    <td>
-                                        <p className='fw-normal mb-1'>{item.amount} cái</p>
-                                    </td>
-                                    <td>
-                                        <p className='fw-normal mb-1'>{item.total.toLocaleString('en-US')} VNĐ</p>
-                                    </td>
-                                    <td>
-                                        <p className='fw-normal mb-1'>{item.status == '1' ? <span>Đang chuẩn bị hàng</span>
-                                            : item.status == '2' ? <span>Đang giao</span> : <span>Đã giao thành công</span>
-                                        }</p>
+                                        <td>{item.status == 0 ? <span>Đơn hàng đã xác nhận</span> : <></>} </td>
                                     </td>
                                     <td >
-                                        <NavLink to={`/manager/products/Editcart/${item.id}`}>
-                                            <p style={{ marginLeft: '2vh' }} >Xác minh đơn hàng</p>
+                                        <NavLink to={`/manager/products/Editcart/${item.id_payment_detail}`}>
+                                            <button className='btn btn-dark' style={{ marginLeft: '2vh' }} >Chi tiết đơn hàng</button>
 
                                         </NavLink>
 

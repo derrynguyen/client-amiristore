@@ -45,7 +45,7 @@ const Deleteuser = () => {
 
 
     const DeleteUser = (id) => {
-        axios.delete(`https://14.225.205.66/Server/api/users/deleteuser.php?id=${id}`)
+        axios.delete(`http://localhost/Server/api/users/deleteuser.php?id=${id}`)
             .then(response => {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
                 history.push('/manager/users');
@@ -54,7 +54,7 @@ const Deleteuser = () => {
     }
 
     useEffect(() => {
-        axios.get(`https://14.225.205.66/Server/api/users/read_user.php?getIDUser=${id}`)
+        axios.get(`http://localhost/Server/api/users/read_user.php?getIDUser=${id}`)
             .then(response => setUser(response.data))
             .catch(error => console.error(error));
     }, [id]);

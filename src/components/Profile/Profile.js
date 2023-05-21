@@ -40,12 +40,12 @@ const Profile = ({ }) => {
 
 
     function getPayment() {
-        axios.get(`https://14.225.205.66/Server/api/cart/read_payment.php?getIDUser=${getIDUser}`).then(function (response) {
+        axios.get(`http://localhost/Server/api/cart/read_payment.php?getIDUser=${getIDUser}`).then(function (response) {
             setPayment(response.data.data);
         });
     }
     useEffect(() => {
-        axios.get(`https://14.225.205.66/Server/api/users/read_user.php?getIDUser=${getIDUser}`)
+        axios.get(`http://localhost/Server/api/users/read_user.php?getIDUser=${getIDUser}`)
             .then(response => setUser(response.data))
             .catch(error => console.error(error));
 
@@ -166,10 +166,10 @@ const Profile = ({ }) => {
                                         <table class="table" >
                                             <thead>
                                                 <tr style={{ backgroundColor: 'black', color: 'white' }}>
-                                                    <th scope="col">Tên</th>
-                                                    <th scope="col">Số lượng</th>
-                                                    <th scope="col">Tổng giá</th>
+                                                    <th scope="col">Mã đơn hàng</th>
+                                                    <th scope="col">Ngày tạo</th>
                                                     <th scope="col">Trạng thái</th>
+                                                    <th scope="col">Tùy chọn</th>
 
                                                 </tr>
                                             </thead>
@@ -177,13 +177,16 @@ const Profile = ({ }) => {
                                                 {paginatedData == null ? <span >Hiện tại chưa có đơn hàng nào</span> :
                                                     paginatedData.map((item, key) => {
                                                         return (
-                                                            <tr>
-                                                                <td>{item.name}</td>
-                                                                <td>{item.amount}</td>
-                                                                <td>{item.total.toLocaleString('en-US')} VNĐ</td>
-                                                                <td>{item.status == '1' ? <span>Đang chuẩn bị hàng</span>
-                                                                    : item.status == '2' ? <span>Đang giao</span> : <span>Đã giao thành công</span>
-                                                                }</td>
+                                                            <tr className="mb-2 mt-2">
+                                                                <td>{item.id_payment_detail}</td>
+                                                                <td>{item.create_at}</td>
+                                                                <td>{item.status == 0 ? <span>Đơn hàng đã xác nhận</span> : <></>} </td>
+                                                                <td>
+                                                                    <NavLink to={`/detailorder/${item.id_payment_detail}`}>
+                                                                        <button type="button" className="btn btn-dark">Chi tiết đơn hàng</button>
+
+                                                                    </NavLink>
+                                                                </td>
                                                             </tr>
                                                         )
                                                     })

@@ -35,7 +35,7 @@ const Paymnet = () => {
     }, []);
 
     function getPayment() {
-        axios.get(`https://14.225.205.66/Server/api/cart/read_payment.php?getIDUser=${getIDUser}`).then(function (response) {
+        axios.get(`http://localhost/Server/api/cart/read_payment.php?getIDUser=${getIDUser}`).then(function (response) {
             setPayment(response.data.data);
         });
     }

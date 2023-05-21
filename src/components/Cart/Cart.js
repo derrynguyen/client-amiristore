@@ -32,7 +32,7 @@ const Cart = () => {
     }, [orders]);
 
     function getOrder() {
-        axios.get(`https://14.225.205.66/Server/api/cart/order.php?getIDUser=${getIDUser}`).then(function (response) {
+        axios.get(`http://localhost/Server/api/cart/order.php?getIDUser=${getIDUser}`).then(function (response) {
             setOrders(response.data.data);
 
         });
@@ -41,7 +41,7 @@ const Cart = () => {
         const formData = new FormData();
 
         formData.append('amount', amount - 1);
-        const response = await axios.post(`https://14.225.205.66/Server/api/cart/removeamount.php?id=${id}`, formData)
+        const response = await axios.post(`http://localhost/Server/api/cart/removeamount.php?id=${id}`, formData)
 
         if (response.data.success) {
             getOrder();
@@ -57,7 +57,7 @@ const Cart = () => {
         const formData = new FormData();
 
         formData.append('amount', amount + 1);
-        axios.post(`https://14.225.205.66/Server/api/cart/updateamount.php?id=${id}`, formData)
+        axios.post(`http://localhost/Server/api/cart/updateamount.php?id=${id}`, formData)
             .then(response => {
                 getOrder();
             })
@@ -65,7 +65,7 @@ const Cart = () => {
     }
     const handleRemoveCart = (id) => {
 
-        axios.post(`https://14.225.205.66/Server/api/cart/removecartitem.php?id=${id}`)
+        axios.post(`http://localhost/Server/api/cart/removecartitem.php?id=${id}`)
             .then(response => {
                 getOrder();
             })
@@ -77,7 +77,7 @@ const Cart = () => {
             getIDUser: getIDUser,
             orders: JSON.stringify(orders),
         };
-        axios.post('https://14.225.205.66/Server/api/cart/payment.php', data)
+        axios.post('http://localhost/Server/api/cart/payment.php', data)
             .then(response => {
                 if (response.data.success) {
                     Toast.fire({ icon: 'success', title: `${response.data.success}` });
