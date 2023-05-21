@@ -81,7 +81,7 @@ const Cart = () => {
             .then(response => {
                 if (response.data.success) {
                     Toast.fire({ icon: 'success', title: `${response.data.success}` });
-                    history.push('/profile');
+                    history.push(`/profile/${getIDUser}`);
                 } else {
                     Toast.fire({ icon: 'error', title: `${response.data.error}` });
                 }
@@ -122,7 +122,7 @@ const Cart = () => {
                                                     <MDBRipple rippleTag="div" rippleColor="light"
                                                         className="bg-image rounded hover-zoom hover-overlay">
                                                         <img
-                                                            src={require('../../images/items/' + item.img)}
+                                                            src={item.img}
                                                             className="w-100" />
                                                         <a href="#!">
                                                             <div className="mask" style={{ backgroundColor: "rgba(251, 251, 251, 0.2)", }}>

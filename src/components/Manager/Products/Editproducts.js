@@ -109,7 +109,7 @@ const Editproducts = () => {
         })
             .then(response => {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
-                history.push('/manager')
+                history.push('/manager/products')
             })
             .catch(error => console.error(error));
     }
@@ -199,7 +199,7 @@ const Editproducts = () => {
                         <button type="button" className="btn btn-dark mt-4 m-4">Quay về</button>
 
                     </NavLink>
-                    <button onClick={EditProducts} type="button" className="btn btn-danger mt-4  m-4">Chỉnh sửa sản phẩm</button>
+                    <button onClick={(id) => EditProducts(products.id)} type="button" className="btn btn-danger mt-4  m-4">Chỉnh sửa sản phẩm</button>
                 </form>
             </div>
         </div>

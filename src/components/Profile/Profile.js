@@ -62,7 +62,7 @@ const Profile = ({ }) => {
                         <MDBCard className="mb-4">
                             <MDBCardBody className="text-center">
                                 {user && <><MDBCardImage
-                                    src={require('../../images/avatar/' + user.avatar + '.png')}
+                                    src={user.avatar}
                                     alt="avatar"
                                     className="rounded-circle"
                                     style={{ width: '140px', height: '17vh' }}
@@ -78,7 +78,7 @@ const Profile = ({ }) => {
                                 <div className="d-flex justify-content-center mb-2">
                                     {myID == getIDUser ?
                                         <>
-                                            <NavLink to='/edit'>
+                                            <NavLink to={`/editprfile/${myID}`}>
                                                 <button type="button" class="btn btn-success">Chỉnh sửa thông tin</button>
                                             </NavLink>
                                         </> : <></>}

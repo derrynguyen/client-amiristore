@@ -146,7 +146,7 @@ const Store = () => {
                                         <NavLink to={`/detail/${item.id}`}>
                                             <div className={cx('card')} >
                                                 <div className={cx('img')}>
-                                                    <img src={require('../../images/items/' + item.img)} />
+                                                    <img src={item.img} />
                                                 </div>
                                                 <div className={cx('brand')}>
                                                     <p>{item.name_brand}</p>

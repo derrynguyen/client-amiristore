@@ -286,7 +286,7 @@ const Products = () => {
                                     <td>
                                         <div className='d-flex align-items-center'>
                                             <img
-                                                src={require('../../../images/items/' + item.img)}
+                                                src={item.img}
                                                 alt=''
                                                 style={{ width: '45px', height: '45px' }}
                                                 className='rounded-circle'

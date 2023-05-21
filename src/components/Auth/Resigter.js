@@ -20,7 +20,7 @@ const Resigter = () => {
     const [checked, SetChecked] = useState([]);
 
     const role = 1;
-    const avatar = 'macdinh';
+    const avatar = 'https://i.imgur.com/r1mYK7m.jpeg';
     const point = 0;
 
     const handleUserName = (event) => {

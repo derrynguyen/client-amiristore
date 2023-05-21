@@ -60,15 +60,15 @@ const Users = () => {
                         users.map((item, key) => {
                             return (
                                 <tr>
-                                    <td>
+                                    <td style={{ width: '30vh' }}>
                                         <div className='d-flex align-items-center'>
                                             <img
-                                                src={require('../../../images/avatar/' + item.avatar + '.png')}
+                                                src={item.avatar}
                                                 alt=''
                                                 style={{ width: '45px', height: '45px' }}
                                                 className='rounded-circle'
                                             />
-                                            <div className='ms-3'>
+                                            <div className='ms-2'>
                                                 <p className='fw-bold mb-1'>{item.fullname}</p>
                                             </div>
                                         </div>
@@ -101,8 +101,10 @@ const Users = () => {
                                                 Chỉnh sửa
                                             </button>
                                         </NavLink>
+                                        <NavLink to={`/manager/users/deleteuser/${item.id}`}>
+                                            <button style={{ marginLeft: '2vh' }} type="button" className="btn btn-info">Xóa</button>
 
-                                        <button style={{ marginLeft: '2vh' }} type="button" className="btn btn-info">Xóa</button>
+                                        </NavLink>
 
                                     </td>
                                 </tr>

@@ -17,14 +17,13 @@ import {
     MDBIcon,
     MDBFile
 } from 'mdb-react-ui-kit';
-import usePagination from '../../../service/usePagination ';
 
 
 import classNames from 'classnames/bind'
-import styles from '../../../css/edituser.module.css'
+import styles from '../../css/edituser.module.css'
 
 let cx = classNames.bind(styles);
-const Edituser = () => {
+const Editprfile = () => {
     const history = useHistory()
     const { id } = useParams();
 
@@ -36,8 +35,6 @@ const Edituser = () => {
     const [phone, setPhone] = useState();
     const [sex, setSex] = useState();
     const [avatar, setAvatar] = useState();
-    const [point, setPoint] = useState();
-    const [role, setRole] = useState();
 
     ///////////Sử lý thêm
     const handleFullname = (event) => {
@@ -56,12 +53,7 @@ const Edituser = () => {
         setSex(event.target.value);
     }
 
-    const handleRole = (event) => {
-        setRole(event.target.value);
-    }
-    const handlePoint = (event) => {
-        setPoint(event.target.value);
-    }
+
     const Toast = Swal.mixin({
         toast: true,
         position: 'center-end',
@@ -82,17 +74,15 @@ const Edituser = () => {
         formData.append('phone', phone);
         formData.append('addreas', addreas);
         formData.append('sex', sex);
-        formData.append('point', point);
-        formData.append('role', role);
 
-        axios.post(`https://mikenco-aloalo.000webhostapp.com/api/users/edituser.php?id=${id}`, formData, {
+        axios.post(`https://mikenco-aloalo.000webhostapp.com/api/users/editprofile.php?id=${id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
         })
             .then(response => {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
-                history.push('/manager/users')
+                history.push(`/profile/${id}`)
             })
             .catch(error => console.error(error));
     }
@@ -147,29 +137,14 @@ const Edituser = () => {
                         </MDBCol>
                     </MDBRow>
 
-                    <MDBRow className='mb-5 mt-3'>
 
-                        <MDBCol>
-                            <select className="browser-default custom-select  w-100" onChange={handleRole}>
-                                <option selected>Vai trò</option>
-                                <option value="1">Khach hàng</option>
-                                <option value="2">Quản lý</option>
-
-
-                            </select>
-                        </MDBCol>
-                        <MDBCol>
-                            <MDBInput type='number' label='Điểm tích lũy' onChange={handlePoint} />
-                        </MDBCol>
-
-                    </MDBRow>
 
                     <div style={{ width: '100%', fontSize: '15px' }}>
                         <input type="file" name="img" label='Ảnh đại diện'
                             onChange={(event) => setAvatar(event.target.files[0])}
                         />
                     </div>
-                    <NavLink to='/manager/users'>
+                    <NavLink to={`/profile/${id}`}>
                         <button type="button" className="btn btn-dark mt-4 m-4">Quay về</button>
 
                     </NavLink>
@@ -179,4 +154,4 @@ const Edituser = () => {
         </div>
     )
 }
-export default Edituser;
+export default Editprfile;

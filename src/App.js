@@ -23,6 +23,8 @@ import Editproducts from './components/Manager/Products/Editproducts';
 import Deleteproducts from './components/Manager/Products/Deleteproducts';
 import Editcart from './components/Manager/Cart/Editcart';
 import Edituser from './components/Manager/Users/Edituser';
+import Deleteuser from './components/Manager/Users/Deleteuser';
+import Editprfile from './components/Profile/Editprfile';
 
 let cx = classNames.bind(styles);
 
@@ -211,6 +213,15 @@ const App = () => {
                 />
               </Route>
 
+              <Route path={`/manager/users/deleteuser/:id`}>
+                <Deleteuser
+                />
+              </Route>
+
+              <Route path={`/editprfile/:id`}>
+                <Editprfile
+                />
+              </Route>
               {isLogin ?
                 <div >
                   {
