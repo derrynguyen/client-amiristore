@@ -10,21 +10,22 @@
 
     .payment {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
         grid-gap: 5vh;
         margin-top: 5vh;
         .box {
             width: 100%;
             padding: 20px;
-            background-color: black;
             color: white;
+            background-color: white;
+            box-shadow: 5px 1px 4px white;
             border-radius: 5px;
             p {
                 color: gray;
                 font-size: 15px;
 
                 span {
-                    color: white;
+                    color: black;
                     font-size: 20px;
                     margin-left: 1vh;
                 }

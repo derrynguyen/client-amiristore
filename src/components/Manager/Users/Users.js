@@ -60,7 +60,7 @@ const Users = () => {
                         users.map((item, key) => {
                             return (
                                 <tr>
-                                    <td style={{ width: '30vh' }}>
+                                    <td style={{ width: '10vh' }}>
                                         <div className='d-flex align-items-center'>
                                             <img
                                                 src={item.avatar}
@@ -73,7 +73,7 @@ const Users = () => {
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td style={{ width: '10vh' }}>
                                         <p className='fw-normal mb-1'>{item.email}</p>
                                     </td>
                                     <td>
@@ -83,7 +83,7 @@ const Users = () => {
                                         <p className='fw-normal mb-1'>{item.sex == '1' ? <span>Nam</span> : <span>Nữ</span>}</p>
                                     </td>
 
-                                    <td>
+                                    <td style={{ width: '20vh' }}>
                                         {item.role == '1' ? <span>
 
                                             <div style={{ textAlign: 'center', padding: '7px', backgroundColor: 'white', color: 'black', borderRadius: '5px' }}>
@@ -95,14 +95,14 @@ const Users = () => {
                                             </div></span>}
 
                                     </td>
-                                    <td>
+                                    <td style={{ width: '20vh' }}>
                                         <NavLink to={`/manager/users/edituser/${item.id}`}>
                                             <button type="button" className="btn btn-success" style={{ marginLeft: '2vh' }}>
                                                 Chỉnh sửa
                                             </button>
                                         </NavLink>
                                         <NavLink to={`/manager/users/deleteuser/${item.id}`}>
-                                            <button style={{ marginLeft: '2vh' }} type="button" className="btn btn-info">Xóa</button>
+                                            <button style={{ marginLeft: '2vh' }} type="button" className="btn btn-info mt-2">Xóa</button>
 
                                         </NavLink>
 

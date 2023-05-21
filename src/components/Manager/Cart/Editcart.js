@@ -28,7 +28,7 @@ const Editcart = () => {
     const history = useHistory()
     const { id } = useParams();
     const [payment, setPayment] = useState([])
-    const [status, SetStatus] = useState(0);
+    const [status, setStatus] = useState('');
 
     const Toast = Swal.mixin({
         toast: true,
@@ -42,10 +42,12 @@ const Editcart = () => {
         },
     });
 
-    const handleOptionChange = (event) => {
-        SetStatus(event.target.value);
-    };
 
+    const handleOptionChange = (event) => {
+        const selectedStatus = event.target.value;
+        setStatus(selectedStatus);
+        console.log('Trạng thái mới:', selectedStatus);
+    };
     useEffect(() => {
         axios.get(`https://14.225.205.66/Server/api/cart/detail_cart.php?id=${id}`)
             .then(response => setPayment(response.data))
@@ -63,29 +65,34 @@ const Editcart = () => {
                         <p>Mã đơn:<span> {payment.id}</span></p>
 
                         <p>Người mua :<span> {payment.fullname}</span></p>
-                    </div>
-                    <div className={cx('box')}>
                         <p>Tên mặt hàng : <span>{payment.name}</span></p>
-                    </div>
-                    <div className={cx('box')}>
                         <p>Size : <span>{payment.size}</span></p>
                         <p>Số lượng : <span>{payment.amount}</span></p>
-
                     </div>
-
 
                     <div className={cx('box')}>
                         <p>Trạng thái</p>
                         <label>
-                            <select value={SetStatus} onChange={handleOptionChange}>
+                            <select onChange={handleOptionChange}>
                                 <option value="1">Đang chuẩn bị hàng</option>
                                 <option value="2">Đang giao</option>
                                 <option value="3">Đã giao thành công</option>
                             </select>
                         </label>
-                        <p className='mt-3'>Trạng thái: {payment.status == '1' ? <span>Đang chuẩn bị hàng</span>
+                        <p className='mt-3'>Trạng thái: {status == '1' ? <span>Đang chuẩn bị hàng</span>
                             : payment.status == '2' ? <span>Đang giao</span> : <span>Đã giao thành công</span>
                         }</p>
+                    </div>
+
+                    <div>
+                        <NavLink to='/manager/products'>
+                            <button type="button" className="btn btn-dark mt-4 m-4">Xác nhận đơn</button>
+
+                        </NavLink>
+                        <NavLink to='/manager/order'>
+                            <button type="button" className="btn btn-dark mt-4 m-4">Quay lại</button>
+
+                        </NavLink>
                     </div>
                 </div>
             </div>
