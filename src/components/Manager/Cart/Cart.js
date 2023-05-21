@@ -48,6 +48,7 @@ const Cart = () => {
                 <MDBTableHead>
                     <tr style={{ textAlign: 'start' }}>
                         <th scope='col'>Mã đơn hàng</th>
+                        <th scope='col'>Chủ nhân</th>
                         <th scope='col'>Ngày tạo</th>
                         <th scope='col'>Trạng thái</th>
                         <th scope='col'>Tùy chỉnh</th>
@@ -63,7 +64,9 @@ const Cart = () => {
                                     <td>
                                         <p className='fw-normal mb-1'>{item.id_payment_detail}</p>
                                     </td>
-
+                                    <td>
+                                        <p className='fw-normal mb-1'>{item.fullname}</p>
+                                    </td>
                                     <td>
                                         <p className='fw-normal mb-1'>{item.create_at}</p>
                                     </td>
