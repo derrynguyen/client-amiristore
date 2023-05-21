@@ -165,7 +165,7 @@ const Detail = ({ props }) => {
 
                     </div>
                     <div style={{ marginBottom: '10vh', marginTop: '3vh', padding: '10px', }}>
-                        <h3 style={{ color: 'black' }}  >Đánh giá sản phẩm: </h3>
+                        {/* <h3 style={{ color: 'black' }}  >Đánh giá sản phẩm: </h3>
                         <div className="form-group">
                             <textarea
                                 className="form-control"
@@ -175,7 +175,7 @@ const Detail = ({ props }) => {
                         </div>
                         <button style={{ marginTop: '1vh' }} type="button" class="btn btn-success">
                             Đăng
-                        </button>
+                        </button> */}
                     </div>
 
                 </div>
