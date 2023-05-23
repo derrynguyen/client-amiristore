@@ -85,7 +85,7 @@ const Edituser = () => {
         formData.append('point', point);
         formData.append('role', role);
 
-        axios.post(`http://14.225.205.66/Server/api/users/edituser.php?id=${id}`, formData, {
+        axios.post(`http://amiristore.rf.gd/Server/api/users/edituser.php?id=${id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -99,7 +99,7 @@ const Edituser = () => {
 
 
     useEffect(() => {
-        axios.get(`http://14.225.205.66/Server/api/users/read_user.php?getIDUser=${id}`)
+        axios.get(`http://amiristore.rf.gd/Server/api/users/read_user.php?getIDUser=${id}`)
             .then(response => setUser(response.data))
             .catch(error => console.error(error));
     }, [id]);
