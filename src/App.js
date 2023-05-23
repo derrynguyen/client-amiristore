@@ -56,7 +56,7 @@ const App = () => {
   }, [orders]);
 
   function getOrder() {
-    axios.get(`http://amiristore.rf.gd/Server/api/cart/order.php?getIDUser=${getIDUser}`).then(function (response) {
+    axios.get(`https://amiristore.rf.gd/Server/api/cart/order.php?getIDUser=${getIDUser}`).then(function (response) {
       setOrders(response.data.data);
 
     });

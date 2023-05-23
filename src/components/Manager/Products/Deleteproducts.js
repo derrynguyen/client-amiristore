@@ -45,7 +45,7 @@ const Deleteproducts = () => {
 
 
     const DeleteProducts = (id) => {
-        axios.delete(`http://amiristore.rf.gd/Server/api/products/delete.php?id=${id}`)
+        axios.delete(`https://amiristore.rf.gd/Server/api/products/delete.php?id=${id}`)
             .then(response => {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
                 history.push('/manager/products');
@@ -54,7 +54,7 @@ const Deleteproducts = () => {
     }
 
     useEffect(() => {
-        axios.get(`http://amiristore.rf.gd/Server/api/products/detail.php?id=${id}`)
+        axios.get(`https://amiristore.rf.gd/Server/api/products/detail.php?id=${id}`)
             .then(response => setProducts(response.data))
             .catch(error => console.error(error));
     }, [id]);

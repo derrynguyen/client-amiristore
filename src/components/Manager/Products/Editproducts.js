@@ -102,7 +102,7 @@ const Editproducts = () => {
         formData.append('amount', amount);
         formData.append('rate', rate);
 
-        axios.post(`http://amiristore.rf.gd/Server/api/products/edit.php?id=${id}`, formData, {
+        axios.post(`https://amiristore.rf.gd/Server/api/products/edit.php?id=${id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -116,7 +116,7 @@ const Editproducts = () => {
 
 
     useEffect(() => {
-        axios.get(`http://amiristore.rf.gd/Server/api/products/detail.php?id=${id}`)
+        axios.get(`https://amiristore.rf.gd/Server/api/products/detail.php?id=${id}`)
             .then(response => setProducts(response.data))
             .catch(error => console.error(error));
     }, [id]);

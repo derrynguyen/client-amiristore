@@ -28,7 +28,7 @@ const Blog = () => {
                                 <div className="d-flex flex-start">
                                     <MDBCardImage
                                         className="rounded-circle shadow-1-strong me-3"
-                                        src="http://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp"
+                                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(23).webp"
                                         alt="avatar"
                                         width="60"
                                         height="60"
@@ -65,7 +65,7 @@ const Blog = () => {
                                 <div className="d-flex flex-start">
                                     <MDBCardImage
                                         className="rounded-circle shadow-1-strong me-3"
-                                        src="http://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(26).webp"
+                                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(26).webp"
                                         alt="avatar"
                                         width="60"
                                         height="60"
@@ -108,7 +108,7 @@ const Blog = () => {
                                 <div className="d-flex flex-start">
                                     <MDBCardImage
                                         className="rounded-circle shadow-1-strong me-3"
-                                        src="http://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(33).webp"
+                                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(33).webp"
                                         alt="avatar"
                                         width="60"
                                         height="60"
@@ -149,7 +149,7 @@ const Blog = () => {
                                 <div className="d-flex flex-start">
                                     <MDBCardImage
                                         className="rounded-circle shadow-1-strong me-3"
-                                        src="http://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(24).webp"
+                                        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(24).webp"
                                         alt="avatar"
                                         width="60"
                                         height="60"
