@@ -85,7 +85,7 @@ const Edituser = () => {
         formData.append('point', point);
         formData.append('role', role);
 
-        axios.post(`https://mikenco-aloalo.000webhostapp.com/api/users/edituser.php?id=${id}`, formData, {
+        axios.post(`http://mikenco-aloalo.000webhostapp.com/api/users/edituser.php?id=${id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -99,7 +99,7 @@ const Edituser = () => {
 
 
     useEffect(() => {
-        axios.get(`https://mikenco-aloalo.000webhostapp.com/api/users/read_user.php?getIDUser=${id}`)
+        axios.get(`http://mikenco-aloalo.000webhostapp.com/api/users/read_user.php?getIDUser=${id}`)
             .then(response => setUser(response.data))
             .catch(error => console.error(error));
     }, [id]);

@@ -40,12 +40,12 @@ const Profile = ({ }) => {
 
 
     function getPayment() {
-        axios.get(`https://mikenco-aloalo.000webhostapp.com/api/cart/read_payment.php?getIDUser=${getIDUser}`).then(function (response) {
+        axios.get(`http://mikenco-aloalo.000webhostapp.com/api/cart/read_payment.php?getIDUser=${getIDUser}`).then(function (response) {
             setPayment(response.data.data);
         });
     }
     useEffect(() => {
-        axios.get(`https://mikenco-aloalo.000webhostapp.com/api/users/read_user.php?getIDUser=${getIDUser}`)
+        axios.get(`http://mikenco-aloalo.000webhostapp.com/api/users/read_user.php?getIDUser=${getIDUser}`)
             .then(response => setUser(response.data))
             .catch(error => console.error(error));
 

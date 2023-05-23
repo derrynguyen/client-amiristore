@@ -37,7 +37,7 @@ const Users = () => {
 
 
     function getUsers() {
-        axios.get('https://mikenco-aloalo.000webhostapp.com/api/users/users.php').then(function (response) {
+        axios.get('http://mikenco-aloalo.000webhostapp.com/api/users/users.php').then(function (response) {
             setUsers(response.data.data);
         });
     }

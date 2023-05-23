@@ -75,7 +75,7 @@ const Editprfile = () => {
         formData.append('addreas', addreas);
         formData.append('sex', sex);
 
-        axios.post(`https://mikenco-aloalo.000webhostapp.com/api/users/editprofile.php?id=${id}`, formData, {
+        axios.post(`http://mikenco-aloalo.000webhostapp.com/api/users/editprofile.php?id=${id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -89,7 +89,7 @@ const Editprfile = () => {
 
 
     useEffect(() => {
-        axios.get(`https://mikenco-aloalo.000webhostapp.com/api/users/read_user.php?getIDUser=${id}`)
+        axios.get(`http://mikenco-aloalo.000webhostapp.com/api/users/read_user.php?getIDUser=${id}`)
             .then(response => setUser(response.data))
             .catch(error => console.error(error));
     }, [id]);

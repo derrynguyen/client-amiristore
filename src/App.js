@@ -56,7 +56,7 @@ const App = () => {
   }, [orders]);
 
   function getOrder() {
-    axios.get(`https://mikenco-aloalo.000webhostapp.com/api/cart/order.php?getIDUser=${getIDUser}`).then(function (response) {
+    axios.get(`http://mikenco-aloalo.000webhostapp.com/api/cart/order.php?getIDUser=${getIDUser}`).then(function (response) {
       setOrders(response.data.data);
 
     });
