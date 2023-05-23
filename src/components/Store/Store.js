@@ -69,7 +69,7 @@ const Store = () => {
         });
 
     const options = [
-        { id: 1, value: "Thom Brown" },
+        { id: 1, value: "Thom Browne" },
         { id: 2, value: "Amiri" },
         { id: 3, value: "Off White" },
         { id: 4, value: "Saint Laurent" },
@@ -89,7 +89,7 @@ const Store = () => {
     ];
 
     function getProducts() {
-        axios.get('http://localhost/Server/api/products/read.php').then(function (response) {
+        axios.get('https://mikenco-aloalo.000webhostapp.com/api/products/read.php').then(function (response) {
             setProducts(response.data.data);
         });
     }

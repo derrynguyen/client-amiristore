@@ -102,7 +102,7 @@ const Products = () => {
         formData.append('amount', amount);
         formData.append('rate', rate);
         try {
-            const response = await axios.post('http://localhost/Server/api/products/create.php', formData, {
+            const response = await axios.post('https://mikenco-aloalo.000webhostapp.com/api/products/create.php', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -152,7 +152,7 @@ const Products = () => {
         formData.append('amount', amount);
         formData.append('rate', rate);
 
-        axios.post(`http://localhost/Server/api/products/edit.php?id=${id}`, formData, {
+        axios.post(`https://mikenco-aloalo.000webhostapp.com/api/products/edit.php?id=${id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -177,7 +177,7 @@ const Products = () => {
         usePagination(products, 6);
 
     function getProducts() {
-        axios.get('http://localhost/Server/api/products/read.php').then(function (response) {
+        axios.get('https://mikenco-aloalo.000webhostapp.com/api/products/read.php').then(function (response) {
             setProducts(response.data.data);
         });
     }

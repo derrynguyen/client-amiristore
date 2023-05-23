@@ -35,7 +35,7 @@ const Paymnet = () => {
     }, []);
 
     function getPayment() {
-        axios.get(`http://localhost/Server/api/cart/read_payment.php?getIDUser=${getIDUser}`).then(function (response) {
+        axios.get(`https://mikenco-aloalo.000webhostapp.com/api/cart/read_payment.php?getIDUser=${getIDUser}`).then(function (response) {
             setPayment(response.data.data);
         });
     }

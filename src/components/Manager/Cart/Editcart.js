@@ -52,7 +52,7 @@ const Editcart = () => {
         setStatus(selectedStatus);
     };
     const handleStatus = async (id, status) => {
-        axios.post(`http://localhost/Server/api/cart/updatepayment.php?id=${id}`, status)
+        axios.post(`https://mikenco-aloalo.000webhostapp.com/api/cart/updatepayment.php?id=${id}`, status)
             .then(response => {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
             })
@@ -60,7 +60,7 @@ const Editcart = () => {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost/Server/api/cart/detail_payment.php?id=${id}`)
+        axios.get(`https://mikenco-aloalo.000webhostapp.com/api/cart/detail_payment.php?id=${id}`)
             .then(response => setPaymentdetail(response.data.data))
             .catch(error => console.error(error));
 

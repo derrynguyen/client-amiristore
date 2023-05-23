@@ -49,7 +49,7 @@ const Login = () => {
     const LoginUser = async () => {
 
         try {
-            const response = await axios.post('http://localhost/Server/api/users/auth.php', { email, password });
+            const response = await axios.post('https://mikenco-aloalo.000webhostapp.com/api/users/auth.php', { email, password });
             if (response.data.success) {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
                 setLoggedIn(true);

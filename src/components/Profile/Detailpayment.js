@@ -50,7 +50,7 @@ const Detailpayment = () => {
 
 
     useEffect(() => {
-        axios.get(`http://localhost/Server/api/cart/detail_payment.php?id=${id}`)
+        axios.get(`https://mikenco-aloalo.000webhostapp.com/api/cart/detail_payment.php?id=${id}`)
             .then(response => setPaymentdetail(response.data.data))
             .catch(error => console.error(error));
     }, [id]);

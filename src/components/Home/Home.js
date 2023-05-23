@@ -23,7 +23,7 @@ const Home = () => {
     }, []);
 
     function getProducts() {
-        axios.get('http://localhost/Server/api/products/read.php').then(function (response) {
+        axios.get('https://mikenco-aloalo.000webhostapp.com/api/products/read.php').then(function (response) {
             setProducts(response.data.data);
         });
     }

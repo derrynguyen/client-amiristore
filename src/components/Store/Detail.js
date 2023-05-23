@@ -26,7 +26,7 @@ const Detail = ({ props }) => {
     const getIDUser = Cookies.get('id');
 
     useEffect(() => {
-        axios.get(`http://localhost/Server/api/products/detail.php?id=${id}`)
+        axios.get(`https://mikenco-aloalo.000webhostapp.com/api/products/detail.php?id=${id}`)
             .then(response => setProduct(response.data))
             .catch(error => console.error(error));
     }, [id]);
@@ -42,6 +42,9 @@ const Detail = ({ props }) => {
 
 
     const addCart = async (name_brand, name, img, price, color, session) => {
+
+
+
         const formData = new FormData();
         formData.append('id_user', getIDUser);
         formData.append('name_brand', name_brand);
@@ -54,7 +57,7 @@ const Detail = ({ props }) => {
         formData.append('amount', amountProducts);
 
         try {
-            const response = await axios.post('http://localhost/Server/api/cart/addcart.php', formData);
+            const response = await axios.post('https://mikenco-aloalo.000webhostapp.com/api/cart/addcart.php', formData);
             if (response.data.success) {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
             }
@@ -149,11 +152,20 @@ const Detail = ({ props }) => {
 
 
                         </div>
+                        {
+                            getIDUser == null ?
+                                <button type="button" className="btn btn-primary mt-3 disabled"
+                                    onClick={(name_brand, name, img, price, color, session, amountProducts) => addCart(product.name_brand, product.name, product.img, product.price, product.color, product.session, amountProducts)}
 
-                        <button type="button" className="btn btn-primary mt-3"
-                            onClick={(name_brand, name, img, price, color, session, amountProducts) => addCart(product.name_brand, product.name, product.img, product.price, product.color, product.session, amountProducts)}
+                                >Thêm vào giỏ hàng</button> :
+                                <button type="button" className="btn btn-primary mt-3"
+                                    onClick={(name_brand, name, img, price, color, session, amountProducts) => addCart(product.name_brand, product.name, product.img, product.price, product.color, product.session, amountProducts)}
 
-                        >Thêm vào giỏ hàng</button><br />
+                                >Thêm vào giỏ hàng</button>
+                        }
+
+
+                        <br />
 
 
                         <NavLink to='/store' >
