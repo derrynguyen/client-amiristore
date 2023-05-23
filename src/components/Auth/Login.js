@@ -49,7 +49,7 @@ const Login = () => {
     const LoginUser = async () => {
 
         try {
-            const response = await axios.post('http://amiristore.rf.gd/Server/api/users/auth.php', { email, password });
+            const response = await axios.post('https://amiristore.rf.gd/Server/api/users/auth.php', { email, password });
             if (response.data.success) {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
                 setLoggedIn(true);

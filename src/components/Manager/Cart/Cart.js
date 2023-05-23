@@ -30,7 +30,7 @@ const Cart = () => {
     const [payment, setPayment] = useState([]);
 
     function getPayment() {
-        axios.get(`http://amiristore.rf.gd/Server/api/cart/read_payment_admin.php`).then(function (response) {
+        axios.get(`https://amiristore.rf.gd/Server/api/cart/read_payment_admin.php`).then(function (response) {
             setPayment(response.data.data);
         });
     }
