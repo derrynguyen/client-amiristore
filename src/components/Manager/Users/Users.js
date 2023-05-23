@@ -37,7 +37,7 @@ const Users = () => {
 
 
     function getUsers() {
-        axios.get('https://amiristore.rf.gd/Server/api/users/users.php').then(function (response) {
+        axios.get('http://amiristore.rf.gd/Server/api/users/users.php').then(function (response) {
             setUsers(response.data.data);
         });
     }

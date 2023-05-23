@@ -23,7 +23,7 @@ const Home = () => {
     }, []);
 
     function getProducts() {
-        axios.get('https://amiristore.rf.gd/Server/api/products/read.php').then(function (response) {
+        axios.get('http://amiristore.rf.gd/Server/api/products/read.php').then(function (response) {
             setProducts(response.data.data);
         });
     }
@@ -34,7 +34,7 @@ const Home = () => {
                 <div className="container text-center" style={{ marginTop: '10px', marginBottom: '5vh' }}>
                     <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4">
                         <video autoPlay={true} allow="autoplay" loop={true} muted={true} playsInline={true} style={{ width: '100%' }}>
-                            <source src="https://thombrownevn.com/wp-content/uploads/2020/06/1813487637.mp4" />
+                            <source src="http://thombrownevn.com/wp-content/uploads/2020/06/1813487637.mp4" />
                         </video>
                     </div>
                 </div>

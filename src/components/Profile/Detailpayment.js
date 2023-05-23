@@ -50,7 +50,7 @@ const Detailpayment = () => {
 
 
     useEffect(() => {
-        axios.get(`https://amiristore.rf.gd/Server/api/cart/detail_payment.php?id=${id}`)
+        axios.get(`http://amiristore.rf.gd/Server/api/cart/detail_payment.php?id=${id}`)
             .then(response => setPaymentdetail(response.data.data))
             .catch(error => console.error(error));
     }, [id]);

@@ -52,7 +52,7 @@ const Editcart = () => {
         setStatus(selectedStatus);
     };
     const handleStatus = async (id, status) => {
-        axios.post(`https://amiristore.rf.gd/Server/api/cart/updatepayment.php?id=${id}`, status)
+        axios.post(`http://amiristore.rf.gd/Server/api/cart/updatepayment.php?id=${id}`, status)
             .then(response => {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
             })
@@ -60,7 +60,7 @@ const Editcart = () => {
     }
 
     useEffect(() => {
-        axios.get(`https://amiristore.rf.gd/Server/api/cart/detail_payment.php?id=${id}`)
+        axios.get(`http://amiristore.rf.gd/Server/api/cart/detail_payment.php?id=${id}`)
             .then(response => setPaymentdetail(response.data.data))
             .catch(error => console.error(error));
 

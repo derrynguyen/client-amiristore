@@ -89,7 +89,7 @@ const Store = () => {
     ];
 
     function getProducts() {
-        axios.get('https://amiristore.rf.gd/Server/api/products/read.php').then(function (response) {
+        axios.get('http://amiristore.rf.gd/Server/api/products/read.php').then(function (response) {
             setProducts(response.data.data);
         });
     }

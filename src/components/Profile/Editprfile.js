@@ -75,7 +75,7 @@ const Editprfile = () => {
         formData.append('addreas', addreas);
         formData.append('sex', sex);
 
-        axios.post(`https://amiristore.rf.gd/Server/api/users/editprofile.php?id=${id}`, formData, {
+        axios.post(`http://amiristore.rf.gd/Server/api/users/editprofile.php?id=${id}`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data',
             },
@@ -89,7 +89,7 @@ const Editprfile = () => {
 
 
     useEffect(() => {
-        axios.get(`https://amiristore.rf.gd/Server/api/users/read_user.php?getIDUser=${id}`)
+        axios.get(`http://amiristore.rf.gd/Server/api/users/read_user.php?getIDUser=${id}`)
             .then(response => setUser(response.data))
             .catch(error => console.error(error));
     }, [id]);

@@ -26,7 +26,7 @@ const Detail = ({ props }) => {
     const getIDUser = Cookies.get('id');
 
     useEffect(() => {
-        axios.get(`https://amiristore.rf.gd/Server/api/products/detail.php?id=${id}`)
+        axios.get(`http://amiristore.rf.gd/Server/api/products/detail.php?id=${id}`)
             .then(response => setProduct(response.data))
             .catch(error => console.error(error));
     }, [id]);
@@ -57,7 +57,7 @@ const Detail = ({ props }) => {
         formData.append('amount', amountProducts);
 
         try {
-            const response = await axios.post('https://amiristore.rf.gd/Server/api/cart/addcart.php', formData);
+            const response = await axios.post('http://amiristore.rf.gd/Server/api/cart/addcart.php', formData);
             if (response.data.success) {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
             }

@@ -20,7 +20,7 @@ const Resigter = () => {
     const [checked, SetChecked] = useState([]);
 
     const role = 1;
-    const avatar = 'https://i.imgur.com/r1mYK7m.jpeg';
+    const avatar = 'http://i.imgur.com/r1mYK7m.jpeg';
     const point = 0;
 
     const handleUserName = (event) => {
@@ -48,7 +48,7 @@ const Resigter = () => {
     const registerUser = async () => {
 
         try {
-            const response = await axios.post('https://amiristore.rf.gd/Server/api/users/register.php', { username, email, password, phone, addreas, sex, role, avatar, point });
+            const response = await axios.post('http://amiristore.rf.gd/Server/api/users/register.php', { username, email, password, phone, addreas, sex, role, avatar, point });
             if (response.data.success) {
                 Toast.fire({ icon: 'success', title: `${response.data.success}` });
                 history.push('/login')
@@ -158,7 +158,7 @@ const Resigter = () => {
                                 </MDBCol>
 
                                 <MDBCol md='10' lg='6' className='order-1 order-lg-2 d-flex align-items-center'>
-                                    <MDBCardImage src='https://insideretail.asia/wp-content/uploads/2022/07/1658580812384.jpeg' fluid />
+                                    <MDBCardImage src='http://insideretail.asia/wp-content/uploads/2022/07/1658580812384.jpeg' fluid />
                                 </MDBCol>
 
                             </MDBRow>
